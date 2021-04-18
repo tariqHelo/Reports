@@ -1,5 +1,7 @@
 @extends('layouts.app') 
 @section('content')
+@include('shared.msg')
+
   <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
@@ -29,7 +31,13 @@
 									 #
 								</th>
 								<th>
-									 إسم الإدارة
+							    	 إسم الإدارة
+                                </th>
+                                <th>
+									 مدير الإدارة
+								</th>
+								<th>
+							    	 إسم الإدارة
                                 </th>
                                 <th>
 									 مدير الإدارة
@@ -40,13 +48,13 @@
 							</tr>
                             </thead>
                             
-                            {{-- @foreach ($groups as $group )
+                            @foreach ($administrations as $administration )
                                 <tr class="odd gradeX">
 										<td>
-                                           {{ $group->id }}
+                                           {{ $administration->id }}
 										</td>
 										<td>
-											{{ $group->title }}
+											{{ $administration->title }}
                                         </td>
                                         	<td>   
 												 <a href=""  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
@@ -54,7 +62,7 @@
 									
 										</td>
 									</tr>
-                            @endforeach --}}
+                            @endforeach
 						  
 						</div>
 					</div>

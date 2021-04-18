@@ -12,44 +12,47 @@
                 </div>
             </div>
             <div class="portlet-body form">
-            <form action="{{route('administration.store')}}" method="POST" role="form">
-                @csrf
+                <form role="form">
                     <div class="form-body">
                         <div class="form-group form-md-line-input form-md-floating-label">
-                            <input type="text" class="form-control" name="title" value="">
+                            <input type="text" class="form-control" id="form_control_1" value="">
                             <label for="form_control_1">إسم الإدارة</label>
                             <span class="help-block">Some help goes here...</span>
                         </div>
+                
                         <div class="form-group form-md-line-input form-md-floating-label has-info">
-                            <select class="form-control edited" name="public_id">
-                                 <option></option>
-                                    @foreach($publics as $public)
-                                        <option value="{{ $public->id }}">{{ $public->title }}</option>
-                                    @endforeach	
+                            <select class="form-control edited" id="form_control_1">
+                                <option value=""></option>
+                                <option value="1" selected></option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
                             </select>
-                            <label for="form_control_1"> إختيار الإدارة العامة</label>
+                            <label for="form_control_1"> إختيار الإدارة</label>
                         </div>
                          <div class="form-group form-md-line-input form-md-floating-label has-info">
-                            <select class="form-control edited" name="branch_id">
-                               <option></option>
-                                   @foreach($branches as $branche)
-                                        <option value="{{ $branche->id }}">{{ $branche->title }}</option>
-                                    @endforeach	
+                            <select class="form-control edited" id="form_control_1">
+                                <option value=""></option>
+                                <option value="1" selected></option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
                             </select>
                             <label for="form_control_1"> إختيار الفرع</label>
                         </div>
                          <div class="form-group form-md-line-input form-md-floating-label has-info">
-                            <select class="form-control edited" name="user_id">
-                                       <option></option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach	
+                            <select class="form-control edited" id="form_control_1">
+                                <option value=""></option>
+                                <option value="1" selected></option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
                             </select>
                             <label for="form_control_1"> إختيار مدير الإدارة</label>
                         </div>
                     <div class="form-actions noborder">
-                        <button type="submit" class="btn blue">حفظ</button>
-                    <a href="{{route('administration.index')}}" type="button" class="btn default">إلغاء</a>
+                        <button type="button" class="btn blue">حفظ</button>
+                        <button type="button" class="btn default">إلغاء</button>
                     </div>
                 </form>
             </div>

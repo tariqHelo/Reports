@@ -2,10 +2,10 @@
 @section('content')
 @include('shared.msg')
  <div class="tab-pane" id="tab_4">
-        <div class="portlet box blue">
+        <div class="portlet box purple">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-gift"></i>إضافة إدارة جديدة</div>
+                    <i class="fa fa-gift"></i>Form Sample </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"> </a>
                     <a href="#portlet-config" data-toggle="modal" class="config"> </a>
@@ -15,24 +15,33 @@
             </div>
             <div class="portlet-body form">
                 <!-- BEGIN FORM-->
-            <form action="{{route('publicAdministration.store')}}" method="POST" class="form-horizontal form-row-seperated">
-                @csrf
+                <form action="#" class="form-horizontal form-row-seperated">
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">إسم الإدارة </label>
+                            <label class="control-label col-md-3">First Name</label>
                             <div class="col-md-9">
-                                <input type="text" placeholder="إسم الإدارة" name="title" class="form-control" />
+                                <input type="text" placeholder="small" class="form-control" />
+                                <span class="help-block"> This is inline help </span>
+                            </div>
+                        </div>
+                       
+                       
+                         <div class="form-group">
+                            <label class="control-label col-md-3">الإدارة العامة التابع لها</label>
+                            <div class="col-md-9">
+                                <select class="form-control"> </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">مدير الإدارة العامة</label>
+                            <label class="control-label col-md-3"> الإدارة التابع لها</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="user_id">
-                                    <option></option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach		
-                                </select>
+                                <select class="form-control"> </select>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3">مدير القسم</label>
+                            <div class="col-md-9">
+                                <select class="form-control"> </select>
                             </div>
                         </div>
                     </div>
@@ -41,7 +50,7 @@
                             <div class="col-md-offset-3 col-md-9">
                                 <button type="submit" class="btn green">
                                     <i class="fa fa-pencil"></i> حفظ</button>
-                                <a href="{{route('publicAdministration.index')}}" type="button" class="btn red">إلغاء</a>
+                                <button type="button" class="btn default">إلغاء</button>
                             </div>
                         </div>
                     </div>

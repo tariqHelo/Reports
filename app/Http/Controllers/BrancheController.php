@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\PublicAdministration;
 use App\Models\Branche;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class BrancheController extends Controller
 {
@@ -14,7 +15,9 @@ class BrancheController extends Controller
      */
     public function index()
     {
-        return view('admin.branches.index');
+         $branches = Branche::orderBy('id', 'DESC')->get();
+        return view('admin.branches.index')
+        ->with('branches' , $branches);
     }
 
     /**
@@ -24,7 +27,11 @@ class BrancheController extends Controller
      */
     public function create()
     {
-      return view('admin.branches.create');
+          $publics = PublicAdministration::get();
+          $users = User::get();
+          return view('admin.branches.create')
+          ->with('publics' , $publics)
+          ->with('users' , $users);
 
     }
 
@@ -35,8 +42,21 @@ class BrancheController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {      
+      //   dd($request->all());
+         $this->validate($request, [
+            'title'  => 'required',
+            'public_id' => 'required'
+
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+            'public_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
+
+        ]);
+          Branche::create($request->all());
+          \Session::flash("msg", "تم إضافة الفرع بنجاح");
+          return redirect()->route('branches.index');
     }
 
     /**
@@ -56,9 +76,19 @@ class BrancheController extends Controller
      * @param  \App\Models\Branche  $branche
      * @return \Illuminate\Http\Response
      */
-    public function edit(Branche $branche)
-    {
-        //
+    public function edit(Request $request , $id)
+    {   
+        $branches = Branche::find($id);
+        $publics = PublicAdministration::get();
+        $users = User::get();
+        return view('admin.branches.edit')
+        ->with('branches' , $branches)
+        ->with('publics' , $publics)
+        ->with('users' , $users);
+
+
+
+
     }
 
     /**
@@ -70,7 +100,9 @@ class BrancheController extends Controller
      */
     public function update(Request $request, Branche $branche)
     {
-        //
+        Student::find($id)->update($request->all());
+        Session::flash("msg", "Student Updated successfully");
+        return redirect()->route('students');
     }
 
     /**
@@ -79,8 +111,11 @@ class BrancheController extends Controller
      * @param  \App\Models\Branche  $branche
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Branche $branche)
+    public function destroy($id)
     {
-        //
+        $branches = Branche::findOrFail($id)->delete();
+        session()->flash("msg", "w: تم الحذف بنجاح");
+        return redirect()->route('branches.index');
     }
+
 }

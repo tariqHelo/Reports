@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administration;
+use App\Models\PublicAdministration;
+
 use Illuminate\Http\Request;
+use App\Models\Branche;
+use App\Models\User;
 
 class AdministrationController extends Controller
 {
@@ -13,8 +17,10 @@ class AdministrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin.administration.index');
+    {   
+        $administrations = Administration::orderBy('id', 'DESC')->get();
+        return view('admin.administration.index')
+        ->with('administrations' , $administrations);
     }
 
     /**
@@ -23,8 +29,14 @@ class AdministrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.administration.create');
+    { 
+        $branches = Branche::get();
+        $publics = PublicAdministration::get();
+        $users = User::get();
+        return view('admin.administration.create')
+           ->with('branches' , $branches)
+          ->with('publics' , $publics)
+           ->with('users' , $users);
     }
 
     /**
@@ -35,7 +47,22 @@ class AdministrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          //   dd($request->all());
+         $this->validate($request, [
+            'title'  => 'required',
+            'public_id' => 'required',
+            // 'branche_id' => 'required',
+            // 'user_id' => 'required'
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+            'public_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
+            // 'branche_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
+            // 'user_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
+        ]);
+          Administration::create($request->all());
+          \Session::flash("msg", "تم إضافة الفرع بنجاح");
+          return redirect()->route('administration.index');
     }
 
     /**

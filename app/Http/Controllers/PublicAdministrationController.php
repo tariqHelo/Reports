@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\PublicAdministration;
+use App\Models\User;
+
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\PublicRequest;
+
 use Illuminate\Http\Request;
 
 class PublicAdministrationController extends Controller
@@ -14,7 +19,10 @@ class PublicAdministrationController extends Controller
      */
     public function index()
     {
-          return view('admin.publicAdministration.index');
+      $publics = PublicAdministration::orderBy('id', 'DESC')->get();
+       return view('admin.publicAdministration.index')
+       ->with('publics' , $publics);
+       //->with('users', $users);
     }
 
     /**
@@ -24,7 +32,9 @@ class PublicAdministrationController extends Controller
      */
     public function create()
     {
-    return view('admin.publicAdministration.create');
+      $users = User::get();
+      return view('admin.publicAdministration.create')
+      ->with('users' , $users);
 
     }
 
@@ -34,9 +44,12 @@ class PublicAdministrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PublicRequest $request)
     {
-        //
+       // dd($request->all());
+          PublicAdministration::create($request->all());
+          \Session::flash("msg", "تم إضافة الإدارة بنجاح");
+          return redirect()->route('publicAdministration.index');
     }
 
     /**
@@ -79,8 +92,10 @@ class PublicAdministrationController extends Controller
      * @param  \App\Models\PublicAdministration  $publicAdministration
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PublicAdministration $publicAdministration)
+    public function destroy($id)
     {
-        //
+         $publics = PublicAdministration::findOrFail($id)->delete();
+         session()->flash("msg", "w: تم الحذف بنجاح");
+          return redirect()->route('publicAdministration.index');
     }
 }

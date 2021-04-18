@@ -23,7 +23,7 @@
                 <div class="form-body">
                     <div class="form-group form-md-line-input has-success">
                         <input type="password" class="form-control" id="form_control_1" name="new_password_confirmation" value="">
-                        <label for="form_control">إعادة كلمة المرور</label>
+                        <label for="form_control">تأكيد كلمة المرور</label>
                     </div>
                 </div>
                 

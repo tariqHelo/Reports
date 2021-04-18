@@ -69,4 +69,14 @@ class User extends Authenticatable
 
     }
 
+    public function publicAdministration(): BelongsTo
+    {
+     return $this->belongsTo(PublicAdministrations::class , 'public_id' , 'id');
+    }
+
+     public function administration(): BelongsTo
+     {
+       return $this->belongsTo(Administration::class , 'administration_id' , 'id');
+     }
+
 }

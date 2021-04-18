@@ -11,10 +11,10 @@ class PublicAdministration extends Model
 
     protected $table ="public_administrations";
     
-    protected $fillable = ['title'];
+    protected $fillable = ['title' , 'user_id'];
     
-     public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id' ,  'id');
     }
 }

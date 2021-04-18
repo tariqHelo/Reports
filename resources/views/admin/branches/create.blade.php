@@ -1,93 +1,63 @@
 @extends('layouts.app') 
 @section('content')
 @include('shared.msg')
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="portlet box yellow">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            <i class="fa fa-gift"></i>Actions Buttons </div>
-                                                        <div class="tools">
-                                                            <a href="javascript:;" class="collapse"> </a>
-                                                            <a href="#portlet-config" data-toggle="modal" class="config"> </a>
-                                                            <a href="javascript:;" class="reload"> </a>
-                                                            <a href="javascript:;" class="remove"> </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="portlet-body form">
-                                                        <!-- BEGIN FORM-->
-                                                        <form action="#">
-                                                            <div class="form-actions top">
-                                                                <div class="btn-set pull-left">
-                                                                    <button type="submit" class="btn green">Submit</button>
-                                                                    <button type="button" class="btn blue">Other Action</button>
-                                                                </div>
-                                                                <div class="btn-set pull-right">
-                                                                    <button type="button" class="btn default">Action 1</button>
-                                                                    <button type="button" class="btn red">Action 2</button>
-                                                                    <button type="button" class="btn yellow">Action 3</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-body">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Text</label>
-                                                                    <input type="text" class="form-control" placeholder="Enter text">
-                                                                    <span class="help-block"> A block of help text. </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Email Address</label>
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon">
-                                                                            <i class="fa fa-envelope"></i>
-                                                                        </span>
-                                                                        <input type="email" class="form-control" placeholder="Email Address"> </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Password</label>
-                                                                    <div class="input-group">
-                                                                        <input type="password" class="form-control" placeholder="Password">
-                                                                        <span class="input-group-addon">
-                                                                            <i class="fa fa-user"></i>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Left Icon</label>
-                                                                    <div class="input-icon">
-                                                                        <i class="fa fa-bell-o"></i>
-                                                                        <input type="text" class="form-control" placeholder="Left icon"> </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Right Icon</label>
-                                                                    <div class="input-icon right">
-                                                                        <i class="fa fa-microphone"></i>
-                                                                        <input type="text" class="form-control" placeholder="Right icon"> </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Input With Spinner</label>
-                                                                    <input type="password" class="form-control spinner" placeholder="Password"> </div>
-                                                                <div class="form-group last">
-                                                                    <label class="control-label">Static Control</label>
-                                                                    <p class="form-control-static"> email@example.com </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-actions">
-                                                                <div class="btn-set pull-left">
-                                                                    <button type="submit" class="btn green">Submit</button>
-                                                                    <button type="button" class="btn blue">Other Action</button>
-                                                                </div>
-                                                                <div class="btn-set pull-right">
-                                                                    <button type="button" class="btn default">Action 1</button>
-                                                                    <button type="button" class="btn red">Action 2</button>
-                                                                    <button type="button" class="btn yellow">Action 3</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                        <!-- END FORM-->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<div class="tab-pane" id="tab_4">
+        <div class="portlet box red">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>إضافة فرع  </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+            <form action="{{route('branches.store')}}" method="POST" class="form-horizontal form-row-seperated">
+                @csrf
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">الإسم  </label>
+                            <div class="col-md-9">
+                                <input type="text" name="title" placeholder="الإسم" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" >الإدارة التابع لها</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="public_id"> 
+                                    <option></option>
+                                    @foreach($publics as $public)
+                                        <option value="{{ $public->id }}">{{ $public->title }}</option>
+                                    @endforeach	
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" >مدير الفرع</label>
+                            <div class="col-md-9">
+                                <select class="form-control"name="user_id">
+                                 <option></option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach	    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">
+                                    <i class="fa fa-pencil"></i> حفظ</button>
+                                <a  href="{{route('branches.index')}}" type="button" class="btn default">إلغاء</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
 @endsection

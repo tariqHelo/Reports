@@ -1,5 +1,7 @@
 @extends('layouts.app') 
 @section('content')
+@include('shared.msg')
+
  <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
@@ -14,7 +16,7 @@
 	         <div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
-					<div class="portlet box grey-cascade">
+					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-globe"></i>الإقسام

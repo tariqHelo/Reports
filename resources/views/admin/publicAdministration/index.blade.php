@@ -1,5 +1,6 @@
 @extends('layouts.app') 
 @section('content')
+@include('shared.msg')
 
  <div class="table-toolbar">
                 <div class="row">
@@ -41,21 +42,23 @@
 							</tr>
                             </thead>
                             
-                            {{-- @foreach ($groups as $group )
+                            @foreach ($publics as $public)
                                 <tr class="odd gradeX">
 										<td>
-                                           {{ $group->id }}
+                                           {{ $public->id }}
 										</td>
 										<td>
-											{{ $group->title }}
-                                        </td>
-                                        	<td>   
-												 <a href=""  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-											     <a href="" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
-									
+											{{ $public->title }}
 										</td>
+											<td>
+											{{ $public->user->name }}
+										</td>
+                                        	<td>   
+											<a href="{{route('public-delete',$public->id)}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+											<a href="{{route('public-delete',$public->id)}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+										   </td>
 									</tr>
-                            @endforeach --}}
+                            @endforeach
 						  
 						</div>
 					</div>

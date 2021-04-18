@@ -10,7 +10,7 @@ class Branche extends Model
 
     protected $table ="branches";
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title' ,'public_id' , 'user_id'];
 
     use HasFactory;
 
@@ -19,18 +19,18 @@ class Branche extends Model
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-    public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id' ,  'id');
     }
       /**
     * Get the user that owns the Branche
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-    public function publicAdministrations(): BelongsTo
-    {
-        return $this->belongsTo(PublicAdministrations::class);
-    }
+       public function administration(): BelongsTo
+       {
+       return $this->belongsTo(Administration::class , 'administration_id' , 'id');
+       }
   
 }
