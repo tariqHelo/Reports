@@ -1,4 +1,4 @@
-@extends('admin.dashboard') 
+@extends('layouts.app') 
 @section('content')
 		<!-- BEGIN PAGE CONTENT-->
 				<div class="row">

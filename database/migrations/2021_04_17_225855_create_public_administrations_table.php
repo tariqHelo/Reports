@@ -15,6 +15,11 @@ class CreatePublicAdministrationsTable extends Migration
     {
         Schema::create('public_administrations', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+              
+            $table->foreignId("user_id")->nullable();
+            $table->foreign('user_id')->references('id')->on("users")->cascadeOnDelete()->cascadeOnUpdate();
+            
             $table->timestamps();
         });
     }

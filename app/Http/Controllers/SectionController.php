@@ -14,7 +14,7 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+          return view('admin.sections.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+     return view('admin.sections.create');
     }
 
     /**

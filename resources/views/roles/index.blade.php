@@ -1,4 +1,4 @@
-@extends('admin.dashboard') 
+@extends('layouts.app') 
 @section('content')
     @can('role_create')
         <div style="margin-bottom: 10px;" class="row">

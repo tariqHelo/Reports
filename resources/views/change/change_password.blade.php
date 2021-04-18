@@ -1,4 +1,4 @@
-@extends("admin.dashboard")
+@extends('layouts.app') 
 @section("content")
 @include("shared.msg")
 <div class="portlet light ">

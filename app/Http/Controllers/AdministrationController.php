@@ -14,7 +14,7 @@ class AdministrationController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.administration.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class AdministrationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.administration.create');
     }
 
     /**

@@ -14,7 +14,7 @@ class BrancheController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.branches.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class BrancheController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.branches.create');
+
     }
 
     /**
