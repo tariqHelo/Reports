@@ -32,7 +32,13 @@
 								</th>
 								<th>
 									 إسم الإدارة
-                                </th>
+								</th>
+								<th>
+									الإدارة  العامة التابع لها 
+								</th>
+								<th>
+									الإدارة  التابع لها 
+								</th>
                                 <th>
 									 مدير الإدارة
 								</th>
@@ -42,21 +48,30 @@
 							</tr>
                             </thead>
                             
-                            {{-- @foreach ($groups as $group )
-                                <tr class="odd gradeX">
-										<td>
-                                           {{ $group->id }}
-										</td>
-										<td>
-											{{ $group->title }}
-                                        </td>
-                                        	<td>   
-												 <a href=""  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-											     <a href="" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
-									
-										</td>
-									</tr>
-                            @endforeach --}}
+								@foreach ($sections as $section )
+									<tr class="odd gradeX">
+											<td>
+											    {{ $section->id }}
+											</td>
+											<td>
+												{{ $section->title }}
+											</td>
+											<td>
+												{{ $section->publicAdministration->title ?? "" }}
+											</td>	
+											<td>
+												{{ $section->administration->title ?? "" }}
+											</td>
+											<td>
+												{{ $section->user->name ?? "" }}
+											</td>
+												<td>   
+												<a href="{{route('section-edit' , $section->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+												<a href="{{route('section-delete'   , $section->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+										
+											</td>
+										</tr>
+								@endforeach
 						  
 						</div>
 					</div>

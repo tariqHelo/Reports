@@ -54,7 +54,7 @@
 											{{ $public->user->name }}
 										</td>
                                         	<td>   
-											<a href="{{route('public-delete',$public->id)}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+											<a href="{{route('public-edit',$public->id)}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
 											<a href="{{route('public-delete',$public->id)}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
 										   </td>
 									</tr>

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Models\Administration;
+use App\Models\PublicAdministration;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class SectionController extends Controller
 {
@@ -13,8 +18,9 @@ class SectionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-          return view('admin.sections.index');
+    {    $sections = Section::orderBy('id', 'DESC')->get();
+          return view('admin.sections.index')
+          ->with('sections' , $sections);
     }
 
     /**
@@ -23,8 +29,15 @@ class SectionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-     return view('admin.sections.create');
+    {   
+        
+        $publics = PublicAdministration::get();
+        $administrations = Administration::get();
+        $users = User::get();
+        return view('admin.sections.create')
+        ->with('publics' , $publics)
+        ->with('administrations' , $administrations)
+        ->with('users' , $users);
     }
 
     /**
@@ -35,7 +48,16 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $this->validate($request, [
+            'title'  => 'required',
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+
+        ]);
+          Section::create($request->all());
+          \Session::flash("msg", "تم إضافة القسم بنجاح");
+          return redirect()->route('sections.index');
     }
 
     /**
@@ -55,9 +77,17 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
-    {
-        //
+    public function edit(Request $request , $id)
+    { // dd(20);
+       $sections = Section::find($id);
+       $publics = PublicAdministration::get();
+       $administrations = Administration::get();
+       $users = User::get();
+       return view('admin.sections.edit')
+       ->with('sections' , $sections)
+       ->with('publics' , $publics)
+       ->with('administrations' , $administrations)
+       ->with('users' , $users);
     }
 
     /**
@@ -67,9 +97,18 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, $id)
     {
-        //
+         $this->validate($request, [
+            'title'  => 'required',
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+
+        ]);
+        Section::find($id)->update($request->all());
+        \Session::flash("msg", "تم تعديل القسم بنجاح");
+        return redirect()->route('sections.index');
     }
 
     /**

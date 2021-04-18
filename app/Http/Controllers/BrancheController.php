@@ -5,6 +5,7 @@ use App\Models\PublicAdministration;
 use App\Models\Branche;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class BrancheController extends Controller
 {
@@ -85,10 +86,6 @@ class BrancheController extends Controller
         ->with('branches' , $branches)
         ->with('publics' , $publics)
         ->with('users' , $users);
-
-
-
-
     }
 
     /**
@@ -98,11 +95,21 @@ class BrancheController extends Controller
      * @param  \App\Models\Branche  $branche
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Branche $branche)
-    {
-        Student::find($id)->update($request->all());
-        Session::flash("msg", "Student Updated successfully");
-        return redirect()->route('students');
+    public function update(Request $request, $id)
+    {    //dd($request->all());
+            $this->validate($request, [
+            'title'  => 'required',
+            'public_id' => 'required'
+
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+            'public_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
+
+        ]);
+        Branche::find($id)->update($request->all());
+        Session::flash("msg", "تم التعديل بنجاح");
+        return redirect()->route('branches.index');
     }
 
     /**

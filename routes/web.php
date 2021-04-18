@@ -53,7 +53,7 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function () {
     /// الإدارة العامة 
     Route::resource('publicAdministration', PublicAdministrationController::class);
     Route::get('publicAdministration/delete/{id}', [PublicAdministrationController::class , 'destroy'])->name('public-delete');
-    Route::get('publicAdministration/edit/{id}',[PublicAdministrationController::class,'destroy'])->name('branche-edit');
+    Route::get('publicAdministration/edit/{id}',[PublicAdministrationController::class,'edit'])->name('public-edit');
 
     /// الفروع
     Route::resource('branches', BrancheController::class);

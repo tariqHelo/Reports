@@ -28,12 +28,12 @@ class Administration extends Model
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
 
-    public function publicAdministration(): BelongsTo
+    public function publicAdministration()
     {
-       return $this->belongsTo(PublicAdministrations::class , 'public_id' , 'id');
+       return $this->belongsTo(PublicAdministration::class , 'public_id' , 'id');
     }
 
-    public function branche(): BelongsTo
+    public function branche()
     {
         return $this->belongsTo(Branche::class , 'branch_id' , 'id');
     }

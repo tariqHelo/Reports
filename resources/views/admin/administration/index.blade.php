@@ -34,10 +34,10 @@
 							    	 إسم الإدارة
                                 </th>
                                 <th>
-									 مدير الإدارة
+									 الإدارة العامة التابع لها 
 								</th>
 								<th>
-							    	 إسم الإدارة
+							    	الفرع التابع بها
                                 </th>
                                 <th>
 									 مدير الإدارة
@@ -54,11 +54,20 @@
                                            {{ $administration->id }}
 										</td>
 										<td>
-											{{ $administration->title }}
+                                           {{ $administration->title ?? "" }}
+										</td>
+										<td>
+										 {{ $administration->publicAdministration->title ?? ""}}
+										</td>
+										<td>
+											{{ $administration->branche->title ?? "" }}
+										</td>
+										<td>
+											{{ $administration->user->name ?? "" }}
                                         </td>
                                         	<td>   
-												 <a href=""  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-											     <a href="" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+											<a href="{{route('administration-edit'   ,$administration->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+											<a href="{{route('administration-delete' ,$administration->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
 									
 										</td>
 									</tr>

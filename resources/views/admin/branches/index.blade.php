@@ -33,12 +33,13 @@
 								<th>
 									 إسم الفرع
 								</th>
+								 <th>
+									 مدير الإدارة
+								</th>
 								<th>
 									إسم الإدارة التابع لها         
                                 </th>
-                                <th>
-									 مدير الإدارة
-								</th>
+                               
 								<th>
 									 Action
 								</th>
@@ -50,15 +51,17 @@
 										<td>
                                            {{ $branche->id }}
 										</td>
+									
 										<td>
 											{{ $branche->title }}
 										</td>
 										<td>
-                                           {{ $branche->public_id }}
-										</td>
-										<td>
-											{{ $branche->user_id }}
+											{{ $branche->user->name ?? ""  }}
                                         </td>
+										<td>
+                                           {{ $branche->publicAdministration->title ?? "" }}
+										</td>
+									
                                         	<td>   
 											<a href="{{route('branche-edit' ,$branche->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
 											<a href="{{route('branche-delete' , $branche->id)}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>

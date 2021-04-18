@@ -69,9 +69,15 @@ class PublicAdministrationController extends Controller
      * @param  \App\Models\PublicAdministration  $publicAdministration
      * @return \Illuminate\Http\Response
      */
-    public function edit(PublicAdministration $publicAdministration)
+    public function edit(Request $request , $id)
     {
-        //
+           //dd(20);
+           $users = User::get();
+           $publics = PublicAdministration::find($id);
+           return view('admin.publicAdministration.edit')
+           ->with('users' , $users)
+           ->with('publics' , $publics);
+
     }
 
     /**
@@ -81,9 +87,21 @@ class PublicAdministrationController extends Controller
      * @param  \App\Models\PublicAdministration  $publicAdministration
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PublicAdministration $publicAdministration)
-    {
-        //
+    public function update(Request $request, $id)
+    {  //   dd($request->all());
+         $this->validate($request, [
+            'title'  => 'required',
+            'user_id' => 'required'
+
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+            'user_id.required' => __('يرجي إدخال مدير الإدارة'),
+
+        ]);
+        PublicAdministration::find($id)->update($request->all());
+        Session::flash("msg", "تم التعديل بنجاح");
+        return redirect()->route('publicAdministration.index');
     }
 
     /**

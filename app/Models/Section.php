@@ -9,7 +9,7 @@ class Section extends Model
 {
     protected $table ="sections";
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title' ,'user_id' , 'public_id' , 'administration_id' ];
 
     use HasFactory;
      /**
@@ -27,12 +27,12 @@ class Section extends Model
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
   
-    public function publicAdministration(): BelongsTo
+    public function publicAdministration()
     {
-      return $this->belongsTo(PublicAdministrations::class , 'public_id' , 'id');
+      return $this->belongsTo(PublicAdministration::class , 'public_id' , 'id');
     }
 
-     public function administration(): BelongsTo
+     public function administration()
      {
        return $this->belongsTo(Administration::class , 'administration_id' , 'id');
      }

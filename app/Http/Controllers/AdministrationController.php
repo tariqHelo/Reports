@@ -8,6 +8,7 @@ use App\Models\PublicAdministration;
 use Illuminate\Http\Request;
 use App\Models\Branche;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class AdministrationController extends Controller
 {
@@ -82,9 +83,20 @@ class AdministrationController extends Controller
      * @param  \App\Models\Administration  $administration
      * @return \Illuminate\Http\Response
      */
-    public function edit(Administration $administration)
+    public function edit(Request $request , $id)
     {
-        //
+       // dd($id);
+        $administrations = Administration::find($id);
+        $publics = PublicAdministration::get();
+
+        $users = User::get();
+        $branches = Branche::get();
+        return view('admin.administration.edit')
+        ->with('administrations' , $administrations)
+        ->with('publics' , $publics)
+        ->with('branches' , $branches)
+        ->with('users' , $users)
+;
     }
 
     /**
@@ -94,9 +106,21 @@ class AdministrationController extends Controller
      * @param  \App\Models\Administration  $administration
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Administration $administration)
+    public function update(Request $request, $id)
     {
-        //
+         $this->validate($request, [
+            'title'  => 'required',
+            'public_id' => 'required'
+
+        ],
+        [
+            'title.required' => __('يرجي إدخال الإسم '),
+            'public_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
+
+        ]);
+        Administration::find($id)->update($request->all());
+        Session::flash("msg", "تم التعديل بنجاح");
+        return redirect()->route('administration.index');
     }
 
     /**
@@ -105,8 +129,10 @@ class AdministrationController extends Controller
      * @param  \App\Models\Administration  $administration
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Administration $administration)
+    public function destroy($id)
     {
-        //
+        $administrations = Administration::findOrFail($id)->delete();
+        session()->flash("msg", "w: تم الحذف بنجاح");
+        return redirect()->route('administration.index');
     }
 }
