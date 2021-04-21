@@ -21,26 +21,30 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-User">
                 <thead>
                     <tr>
-                        <th width="10">
-
+                        <th>
+                            ID
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.id') }}
+                            الإسم
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.name') }}
+                            رقم الهوية
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.email') }}
+                            المسمي الوظيفي
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
+                            رقم الجوال
+                        </th>
+                       
+                        <th>
+                           البريد الإلكتروني
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.roles') }}
+                           roles
                         </th>
                         <th>
-                            &nbsp;
+                           Action
                         </th>
                     </tr>
                 </thead>
@@ -48,19 +52,22 @@
                     @foreach($users as $key => $user)
                         <tr data-entry-id="{{ $user->id }}">
                             <td>
-
-                            </td>
-                            <td>
                                 {{ $user->id ?? '' }}
                             </td>
                             <td>
                                 {{ $user->name ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email ?? '' }}
+                                {{ $user->numberId ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email_verified_at ?? '' }}
+                                {{ $user->jobtitle ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->phone ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->email ?? '' }}
                             </td>
                             <td>
                                 @foreach($user->roles as $key => $item)

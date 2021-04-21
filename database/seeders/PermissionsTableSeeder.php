@@ -82,6 +82,50 @@ class PermissionsTableSeeder extends Seeder
            'id' => '15',
            'title' => 'user_access',
            ],
+
+
+                   [
+                   'id' => '12',
+                   'title' => 'Master_management_access',
+                   ],
+                    [
+                    'id' => '13',
+                    'title' => 'PublicAdministration',
+                    ],
+                    [
+                    'id' => '14',
+                    'title' => 'Branches ',
+                    ],
+                    [
+                    'id' => '15',
+                    'title' => 'Administration',
+                    ],
+                    [
+                    'id' => '15',
+                    'title' => 'Sections',
+                    ],
+                 
+
+
+
+
+
+                   [
+                   'id' => '13',
+                   'title' => 'PublicAdministration',
+                   ],
+                   [
+                   'id' => '14',
+                   'title' => 'Branches ',
+                   ],
+                   [
+                   'id' => '15',
+                   'title' => 'Administration',
+                   ],
+                    [
+                    'id' => '15',
+                    'title' => 'Sections',
+                    ],
          
            ];
 

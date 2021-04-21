@@ -24,9 +24,8 @@
                             <label class="control-label col-md-3"> الإدارة</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="administration_id"> 
-                                    <option></option>
                                     @foreach($administrations as $administration)
-                                        <option value="{{ $administration->id }}">{{ $administration->title }}</option>
+    <option {{$administration->id == $tasks->administration_id?"selected":""}} value='{{$administration->id}}'>{{$administration->title}}</option>
                                     @endforeach	
                                 </select>
                             </div>
@@ -35,14 +34,13 @@
                             <label class="control-label col-md-3"> القسم</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="section_id">
-                                    <option></option>
                                     @foreach($sections as $section)
-                                        <option value="{{ $section->id }}">{{ $section->title }}</option>
+ <option {{$section->id == $tasks->section_id?"selected":""}} value='{{$section->id}}'>{{$section->title}}</option>
                                     @endforeach	
                                 </select>
                             </div>
                         </div>
-                         <div class="form-group">
+                         {{-- <div class="form-group">
                             <label class="control-label col-md-3"> الموظف</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="employee_id">
@@ -52,13 +50,14 @@
                                     @endforeach	
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                          <div class="form-group">
                             <label class="control-label col-md-3"> نوع المهمة</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="type_id">
-                                    <option></option>
                                     @foreach($taskstype as $type)
+<option {{$type->id == $tasks->type_id?"selected":""}} value='{{$type->id}}'>{{$type->title}}</option>
+
                                         <option value="{{ $type->id }}">{{ $type->type }}</option>
                                     @endforeach	
                                 </select>
@@ -68,9 +67,8 @@
                             <label class="control-label col-md-3"> الحالة</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="statue_id">
-                                    <option></option>
                                     @foreach($taskstatus as $status)
-                                        <option value="{{ $status->id }}">{{ $status->status }}</option>
+    <option {{$status->id == $tasks->statue_id?"selected":""}} value='{{$status->id}}'>{{$status->status}}</option>
                                     @endforeach	
                                 </select>
                             </div>
@@ -79,15 +77,15 @@
                             <label class="control-label col-md-3"> ساعات العمل</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="worktime">
-                                   <option> </option>
-                                    <option value="1"> 1</option>
-                                    <option value="2"> 2</option>
-                                    <option value="3"> 3</option>
-                                    <option value="4"> 4</option>
-                                    <option value="5"> 5</option>
-                                    <option value="6"> 6</option>
-                                    <option value="7"> 7</option>
-                                    <option value="8"> 8</option>
+                                    <option></option>
+                                    <option value="1" {{ old('worktime') == $tasks  ? 'selected' : '' }}> 1</option>
+                                    <option value="2" {{ old('worktime') == $tasks  ? 'selected' : '' }}> 2</option>
+                                    <option value="3" {{ old('worktime') == $tasks ? 'selected' : '' }}> 3</option>
+                                    <option value="4" {{ old('worktime') == $tasks ? 'selected' : '' }}> 4</option>
+                                    <option value="5" {{ old('worktime') == $tasks ? 'selected' : '' }}> 5</option>
+                                    <option value="6" {{ old('worktime') == $tasks ? 'selected' : '' }}> 6</option>
+                                    <option value="7" {{ old('worktime') == $tasks ? 'selected' : '' }}> 7</option>
+                                    <option value="8" {{ old('worktime') == $tasks ? 'selected' : '' }}> 8</option>
                                 </select>
                             </div>
                         </div>
@@ -97,7 +95,7 @@
                                 <select class="form-control" name="user_id">
                                     <option></option>
                                     @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option {{$user->id == $tasks->user_id?"selected":""}} value='{{$user->id}}'>{{$user->name}}</option>
                                     @endforeach	
                                 </select>
                             </div>
@@ -106,7 +104,7 @@
                                 <label class="control-label col-md-3">تاريخ بداية المهمة</label>
                                 <div class="col-md-3">
                                     <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-                                        <input type="text" class="form-control" name="sdate" readonly>
+                                        <input type="text" class="form-control" value="{{ old('sdate', date('Y-m-d')) }}" name="sdate" readonly>
                                         <span class="input-group-btn">
                                             <button class="btn default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -119,7 +117,7 @@
                                 <label class="control-label col-md-3">تاريخ نهاية المهمة</label>
                                 <div class="col-md-3">
                                     <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-                                        <input type="text" class="form-control" name="edate" readonly>
+                                        <input type="text"  value="{{ old('edate', date('Y-m-d')) }}" class="form-control" name="edate" readonly>
                                         <span class="input-group-btn">
                                             <button class="btn default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -131,7 +129,7 @@
                          <div class="form-group">
                             <label class="control-label col-md-3">عنوان المهمة</label>
                             <div class="col-md-9">
-                                <input type="text" placeholder="عنوان المهمة" name="title" class="form-control" />
+                                <input type="text" placeholder="عنوان المهمة" value="{{$tasks->title}}" name="title" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">

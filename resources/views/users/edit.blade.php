@@ -53,97 +53,96 @@
             </div>
         </form>
     </div>
-</div>
- --}}
+</div> --}}
+
   <!-- BEGIN PROFILE CONTENT -->
-                            <div class="profile-content">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="portlet light ">
-                                            <div class="portlet-title tabbable-line">
-                                                <div class="caption caption-md">
-                                                    <i class="icon-globe theme-font hide"></i>
-                                                    <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
-                                                </div>
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active">
-                                                        <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#tab_1_2" data-toggle="tab">Change Avatar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#tab_1_3" data-toggle="tab">Change Password</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#tab_1_4" data-toggle="tab">Privacy Settings</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="portlet-body">
-                                                <div class="tab-content">
-                                                    <!-- PERSONAL INFO TAB -->
-                                                    <div class="tab-pane active" id="tab_1_1">
-                                                        <form role="form" action="#">
-                                                            <div class="form-group">
-                                                                <label class="control-label">First Name</label>
-                                                                <input type="text" placeholder="John" class="form-control" /> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Last Name</label>
-                                                                <input type="text" placeholder="Doe" class="form-control" /> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Mobile Number</label>
-                                                                <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control" /> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Interests</label>
-                                                                <input type="text" placeholder="Design, Web etc." class="form-control" /> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Occupation</label>
-                                                                <input type="text" placeholder="Web Developer" class="form-control" /> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">About</label>
-                                                                <textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Website Url</label>
-                                                                <input type="text" placeholder="http://www.mywebsite.com" class="form-control" /> </div>
-                                                            <div class="margiv-top-10">
-                                                                <a href="javascript:;" class="btn green"> Save Changes </a>
-                                                                <a href="javascript:;" class="btn default"> Cancel </a>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!-- END PERSONAL INFO TAB -->
-                                                    <!-- CHANGE AVATAR TAB -->
-                                                    <div class="tab-pane" id="tab_1_2">
-                                                        <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                            eiusmod. </p>
-                                                        <form action="#" role="form">
-                                                            <div class="form-group">
-                                                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
-                                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-                                                                    <div>
-                                                                        <span class="btn default btn-file">
-                                                                            <span class="fileinput-new"> Select image </span>
-                                                                            <span class="fileinput-exists"> Change </span>
-                                                                            <input type="file" name="..."> </span>
-                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="clearfix margin-top-10">
-                                                                    <span class="label label-danger">NOTE! </span>
-                                                                    <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="margin-top-10">
-                                                                <a href="javascript:;" class="btn green"> Submit </a>
-                                                                <a href="javascript:;" class="btn default"> Cancel </a>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!-- END CHANGE AVATAR TAB -->
+<div class="profile-content">
+        <form method="POST" action="{{ route("users.store") }}" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label class="required" for="name"> <h4>الإسم بالكامل  </h4>  </label>
+            <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $user->name)}}" required>
+        
+            </div>
+            <div class="form-group">
+                <label class="required" for="name"> <h4>رقم الهوية </h4>  </label>
+                <input class="form-control" type="number" name="numberId" id="numberId" value="{{ old('numberId', $user->numberId) }}" required>
+            </div>
+             <div class="form-group">
+                <label class="required" for="name"> <h4> المسمي الوظيفي </h4>  </label>
+                <input class="form-control" type="text" name="jobtitle" id="jobtitle" value="{{ old('jobtitle', $user->jobtitle) }}" required>   
+            </div>
+           <div class="form-group">
+                <label class="required" for="email"> <h4>  رقم الجوال </h4> </label>
+                <input class="form-control " type="number" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" required>
+ 
+            </div>
+            <div class="form-group">
+                <label class="required" for="email"> <h4> البريد الإلكتروني </h4> </label>
+                <input class="form-control" type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required>
+ 
+            </div>
+            <div class="form-group">
+                <label class="required" for="password"><h4> كلمة المرور </h4></label>
+                <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
+            </div>
 
+             <div class="form-group">
+                <label class="required" for="password"><h4> الإدارة العامة </h4></label>
+                 <select class="form-control"name="public_id"> 
+                        <option></option>
+                            @foreach($publics as $public)
+    <option {{$public->id == $user->public_id?"selected":""}} value='{{$public->id}}'>{{$public->title}}</option>
+                            @endforeach	
+                    </select>
+            </div>
+            <div class="form-group">
+                <label class="required" for="password"><h4>  الفرع </h4></label>
+                 <select class="form-control"name="branche_id"> 
+                        <option></option>
+                            @foreach($branches as $branche)
+    <option {{$branche->id == $user->branche_id?"selected":""}} value='{{$branche->id}}'>{{$branche->title}}</option>
+                            @endforeach	
+                    </select>
+            </div>
+            <div class="form-group">
+                <label class="required" for="password"><h4>  الإدارة </h4></label>
+                 <select class="form-control"name="administration_id"> 
+                        <option></option>
+                            @foreach($administrations as $administration)
+    <option {{$administration->id == $user->administration_id?"selected":""}} value='{{$administration->id}}'>{{$administration->title}}</option>
+                            @endforeach	
+                    </select>
+            </div>
+            <div class="form-group">
+                <label class="required" for="password"><h4>  القسم </h4></label>
+                 <select class="form-control"name="section_id"> 
+                        <option></option>
+                          @foreach($sections as $section)
+            <option {{$section->id == $user->section_id?"selected":""}} value='{{$section->id}}'>{{$section->title}}</option>
+                            @endforeach	
+                    </select>
+            </div>
 
+             
+            <div class="form-group">
+                <label class="required" for="roles"><h4>  الإدوار</h4></label>
+                
+                 <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple required>
+                    @foreach($roles as $id => $roles)
+                        <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+          
+            <div class="form-group">
+                <button class="btn btn-danger" type="submit">
+                    {{ trans('global.save') }}
+                </button>
+                <a href="{{route('users.index')}}" type="button" class="btn default">إلغاء</a>
+
+            </div>
+        </form>
+</div>
 @endsection

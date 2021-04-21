@@ -13,199 +13,114 @@
                     <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
                     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                        <li class="nav-item start ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-home"></i>
-                                <span class="title">الإدارة العامة والفروع والإقسام</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item start ">
-                                <a href="{{route('publicAdministration.index')}}" class="nav-link ">
-                                        <i class="icon-bar-chart"></i>
-                                        <span class="title">الإدارة العامة </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item start ">
-                                    <a href="{{route('branches.index')}}" class="nav-link ">
-                                        <i class="icon-bulb"></i>
-                                        <span class="title">الفروع</span>
-                                        <span class="badge badge-success">1</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item start ">
-                                    <a href="{{route('administration.index')}}" class="nav-link ">
-                                        <i class="icon-bar-chart"></i>
-                                        <span class="title">الإدارة </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item start ">
-                                    <a href="{{route('sections.index')}}" class="nav-link ">
-                                        <i class="icon-graph"></i>
-                                        <span class="title">الإقسام</span>
-                                        <span class="badge badge-danger">5</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                    @can('Master')
+                            <li class="nav-item start ">
+                                <a href="#" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">الإدارة العامة والفروع والإقسام</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                @can('PublicAdministration')
+                                    <li class="nav-item start ">
+                                          <a href="{{route('publicAdministration.index')}}" class="nav-link ">
+                                            <i class="icon-bar-chart"></i>
+                                            <span class="title">الإدارة العامة </span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('Branches')
+                                       <li class="nav-item start ">
+                                        <a href="{{route('branches.index')}}" class="nav-link ">
+                                            <i class="icon-bulb"></i>
+                                            <span class="title">الفروع</span>
+                                            <span class="badge badge-success">1</span>
+                                        </a>
+                                    </li> 
+                                @endcan
+                                @can('Administration')
+                                    <li class="nav-item start ">
+                                        <a href="{{route('administration.index')}}" class="nav-link ">
+                                            <i class="icon-bar-chart"></i>
+                                            <span class="title">الإدارة </span>
+                                        </a>
+                                    </li> 
+                                @endcan
+                                @can('Sections')
+                                    <li class="nav-item start ">
+                                        <a href="{{route('sections.index')}}" class="nav-link ">
+                                            <i class="icon-graph"></i>
+                                            <span class="title">الإقسام</span>
+                                            <span class="badge badge-danger">5</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                </ul>
+                            </li>  
+                    @endcan
+                    @can('Users')
                         <li class="nav-item ">
                            <a href="{{route('users.index')}}" class="nav-link nav-toggle">
                                 <i class="icon-settings"></i>
                                 <span class="title">المستخدمين</span>
                                 <span class="arrow"></span>
                             </a>
-                        </li>
+                        </li> 
+                    @endcan
+                    @can('Roles')
                         <li class="nav-item ">
                                 <a href="{{route('roles.index')}}" class="nav-link ">
                                     <i class="icon-bulb"></i>
                                     <span class="title">الإدوار</span>
                                 </a>
-                        </li>
-                        <li class="nav-item ">
+                        </li>    
+                    @endcan
+                    @can('Permissions')
+                            <li class="nav-item ">
                             <a href="{{route('permissions.index')}}" class="nav-link nav-toggle">
                                     <i class="icon-bar-chart"></i>
                                     <span class="title">الصلاحيات</span>
                                     <span class="arrow"></span>
                             </a>  
-                        </li>
-                        <li class="nav-item  ">
+                        </li>   
+                     @endcan
+                     @can('Tasks_Manger')
+                       <li class="nav-item  ">
                           <a href="#" class="nav-link nav-toggle">
                                 <i class="icon-diamond"></i>
                                 <span class="title">حالة ونوع المهام</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
+                                @can('Tasks_Status')
                                 <li class="nav-item  ">
-                                    <a href="{{route('taskstatus.index')}}" class="nav-link ">
-                                        <span class="title">حالة المهام </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="{{route('taskstype.index')}}" class="nav-link ">
-                                        <span class="title">نوع المهام</span>
-                                        <span class="badge badge-danger">2</span>
-                                    </a>
-                                </li>
+                                        <a href="{{route('taskstatus.index')}}" class="nav-link ">
+                                            <span class="title">حالة المهام </span>
+                                        </a>
+                                    </li>   
+                                @endcan
+                                @can('Tasks_Type')
+                                    <li class="nav-item  ">
+                                        <a href="{{route('taskstype.index')}}" class="nav-link ">
+                                            <span class="title">نوع المهام</span>
+                                            <span class="badge badge-danger">2</span>
+                                        </a>
+                                    </li>   
+                                @endcan  
                             </ul> 
                             
-                        </li>
-                        <li class="nav-item">
-                        <a href="{{route('tasks.index')}}" class="nav-link nav-toggle">
+                        </li>  
+                     @endcan
+                     @can('Tasks')
+                          <li class="nav-item">
+                          <a href="{{route('tasks.index')}}" class="nav-link nav-toggle">
                                 <i class="icon-puzzle"></i>
                                 <span class="title">المهام</span>
                                 <span class="arrow"></span>
                             </a>
-                            {{-- <ul class="sub-menu">
-                                <li class="nav-item  ">
-                                    <a href="components_date_time_pickers.html" class="nav-link ">
-                                        <span class="title">Date & Time Pickers</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_color_pickers.html" class="nav-link ">
-                                        <span class="title">Color Pickers</span>
-                                        <span class="badge badge-danger">2</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_select2.html" class="nav-link ">
-                                        <span class="title">Select2 Dropdowns</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_multiselect_dropdown.html" class="nav-link ">
-                                        <span class="title">Bootstrap Multiselect Dropdowns</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_select.html" class="nav-link ">
-                                        <span class="title">Bootstrap Select</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_multi_select.html" class="nav-link ">
-                                        <span class="title">Bootstrap Multiple Select</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_select_splitter.html" class="nav-link ">
-                                        <span class="title">Select Splitter</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_clipboard.html" class="nav-link ">
-                                        <span class="title">Clipboard</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_typeahead.html" class="nav-link ">
-                                        <span class="title">Typeahead Autocomplete</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_tagsinput.html" class="nav-link ">
-                                        <span class="title">Bootstrap Tagsinput</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_switch.html" class="nav-link ">
-                                        <span class="title">Bootstrap Switch</span>
-                                        <span class="badge badge-success">6</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_maxlength.html" class="nav-link ">
-                                        <span class="title">Bootstrap Maxlength</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_fileinput.html" class="nav-link ">
-                                        <span class="title">Bootstrap File Input</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_bootstrap_touchspin.html" class="nav-link ">
-                                        <span class="title">Bootstrap Touchspin</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_form_tools.html" class="nav-link ">
-                                        <span class="title">Form Widgets & Tools</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_context_menu.html" class="nav-link ">
-                                        <span class="title">Context Menu</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_editors.html" class="nav-link ">
-                                        <span class="title">Markdown & WYSIWYG Editors</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_code_editors.html" class="nav-link ">
-                                        <span class="title">Code Editors</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_ion_sliders.html" class="nav-link ">
-                                        <span class="title">Ion Range Sliders</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_noui_sliders.html" class="nav-link ">
-                                        <span class="title">NoUI Range Sliders</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="components_knob_dials.html" class="nav-link ">
-                                        <span class="title">Knob Circle Dials</span>
-                                    </a>
-                                </li>
-                            </ul> --}}
-                        </li>
-                     
+                        </li>  
+                    @endcan
+                    @can('Reports')
                         <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-bulb"></i>
@@ -234,7 +149,9 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>  
+                    @endcan
+                    @can('Settings')
                         <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-briefcase"></i>
@@ -263,14 +180,18 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>   
+                    @endcan
+                    @can('Help')
                         <li class="nav-item  ">
-                            <a href="?p=" class="nav-link nav-toggle">
+                            <a href="#" class="nav-link nav-toggle">
                                 <i class="icon-wallet"></i>
                                 <span class="title">صفحة المساعدة</span>
                                 <span class="arrow"></span>
                             </a> 
                         </li>
+                    @endcan
+                        
                         {{-- <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-bar-chart"></i>

@@ -5,7 +5,7 @@
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-                    <a href="index.html">
+                    <a href="#">
                         <img src="{{asset('metroinc/assets/layouts/layout2/img/logo-default.png')}}" alt="logo" class="logo-default" /> </a>
                     <div class="menu-toggler sidebar-toggler">
                         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -13,7 +13,7 @@
                 </div>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+                <a href="#" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN PAGE ACTIONS -->
                 <!-- DOC: Remove "hide" class to enable the page header actions -->
@@ -25,7 +25,7 @@
                 <div class="page-top">
                     <!-- BEGIN HEADER SEARCH BOX -->
                     <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-                    <form class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
+                    <form class="search-form search-form-expanded" action="#" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search..." name="query">
                             <span class="input-group-btn">
@@ -44,7 +44,7 @@
                             <!-- DOC: Apply "dropdown-hoverable" class after below "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
                             <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
                             <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <i class="icon-bell"></i>
                                     <span class="badge badge-default"> 7 </span>
                                 </a>
@@ -338,7 +338,8 @@
                                 </a>
                         	<ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="{{route('user-edit' , auth()->user()->id)}}">
+
+                                    <a href="{{ route('users.edit', auth()->user()->id) }}">
                                     <i class="icon-user"></i> حسابي</a>
                                 </li>
                                 <li>

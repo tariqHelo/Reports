@@ -48,13 +48,13 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-          $this->validate($request, [
-            'title'  => 'required',
-        ],
-        [
-            'title.required' => __('يرجي إدخال الإسم '),
-
-        ]);
+        //   $this->validate($request, [
+        //    'name' => ['required'],
+        //    'email' => ['required','unique:users'],
+        //    'password' => ['required'],
+        //    'roles.*' => ['integer'],
+        //    'roles' => ['required','array'],
+        //   ]);
           Section::create($request->all());
           \Session::flash("msg", "تم إضافة القسم بنجاح");
           return redirect()->route('sections.index');

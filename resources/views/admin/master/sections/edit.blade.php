@@ -34,7 +34,7 @@
                                 <select class="form-control"name="public_id"> 
                                     <option></option>
                                     @foreach($publics as $public)
-                                        <option value="{{ $public->id }}">{{ $public->title }}</option>
+    <option {{$public->id == $sections->public_id?"selected":""}} value='{{$public->id}}'>{{$public->title}}</option>
                                     @endforeach	
                                 </select>
                             </div>
@@ -45,7 +45,8 @@
                                 <select class="form-control" name="administration_id"> 
                                     <option></option>
                                     @foreach($administrations as $administration)
-                                        <option value="{{ $administration->id }}">{{ $administration->title }}</option>
+    <option {{$administration->id == $sections->administration_id?"selected":""}} value='{{$administration->id}}'>{{$administration->title}}</option>
+
                                     @endforeach	
                                 </select>
                             </div>
@@ -56,7 +57,7 @@
                                 <select class="form-control" name="user_id">
                                     <option></option>
                                     @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option {{$user->id == $sections->user_id?"selected":""}} value='{{$user->id}}'>{{$user->name}}</option>
                                     @endforeach	
                                 </select>
                             </div>

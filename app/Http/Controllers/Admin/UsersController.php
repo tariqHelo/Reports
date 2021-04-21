@@ -1,7 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\Section;
 
+use App\Models\Branche;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\Administration;
+use App\Models\PublicAdministration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
@@ -28,14 +34,42 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::all()->pluck('title', 'id');
+         $roles = Role::all()->pluck('title', 'id');
+         $publics = PublicAdministration::get();
+         $administrations = Administration::get();
+         $branches = Branche::get();
+         $sections = Section::get();
 
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles' , 'publics' , 
+        'administrations' , 'branches' ,'sections'));
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
-        $user = User::create($request->all());
+       abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+         
+    
+        $this->validate($request, [
+        'name' => 'required',
+        'numberId' => 'required',
+        'jobtitle' => 'required',
+        'phone' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+
+
+        'public_id'          => 'required',
+        'branche_id'         => 'required' ,
+        'administration_id'  => 'required',
+        'section_id'         => 'required',
+        
+        ],
+        [
+        'name.required' => __('يرجي إدخال الإسم '),
+        ]);
+
+       $password = Hash::make('password');
+        $user = User::create($request->all() , $password);
         $user->roles()->sync($request->input('roles', []));
         \Session::flash("msg", "تم إضافة المستخدم بنجاح");
 
@@ -50,8 +84,12 @@ class UsersController extends Controller
         $roles = Role::all()->pluck('title', 'id');
 
         $user->load('roles');
-
-        return view('users.edit', compact('roles', 'user'));
+        $publics = PublicAdministration::get();
+        $administrations = Administration::get();
+        $branches = Branche::get();
+        $sections = Section::get();
+        return view('users.edit', compact('roles', 'publics' ,
+        'administrations' , 'branches' ,'sections' , 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

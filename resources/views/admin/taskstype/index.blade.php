@@ -17,7 +17,7 @@
     <div class="portlet box red">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-cogs"></i>حالة ونوع المهام</div>
+                <i class="fa fa-cogs"></i> نوع المهام</div>
             <div class="tools">
                 <a href="javascript:;" class="collapse"> </a>
                 <a href="#portlet-config" data-toggle="modal" class="config"> </a>

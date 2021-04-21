@@ -44,13 +44,13 @@
                             @foreach ( $tasks as $task )
                             <tr>
                                 <td> {{$task->id}} </td>
-                                <td> {{$task->section->title ?? ""}} </td>
+                                <td> {{$task->section->title ?? "" }} </td>
                                 <td> {{$task->administration->title ?? ""}} </td>
-                                <td> {{$task->type->type ?? "" }} </td>
+                                <td> {{$task->tasktype->title ?? "" }} </td>
                                 <td> {{$task->statue->status ?? ""}} </td>
                                 <td> {{$task->sdate}} </td>
                                 <td> {{$task->edate}} </td>
-                                <td> {{$task->timework}} </td>
+                                <td> {{$task->worktime}} </td>
                                 <td> {{$task->title}} </td>
                                 <td> {{$task->employee->name ?? ""}} </td>
                                 <td> {{$task->user->name ?? ""}} </td>

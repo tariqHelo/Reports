@@ -26,60 +26,65 @@
 								</div>
 							</div>
 							<div class="portlet-body">
-								<table class="table table-striped table-bordered table-hover" id="sample_3">
-								<thead>
-								<tr>
-									<th class="table-checkbox">
-										<input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes"/>
-									</th>
-									<th>
-										 id
-									</th>
-									<th>
-										 title
-									</th>
-									<th>
-										 Status
-									</th>
-								</tr>
-								</thead>
-								<tbody>
-                                @foreach($permissions as $key => $permission)
-                                    <tr class="odd gradeX">
-                                        <td>
-                                            <input type="checkbox" class="checkboxes" value="1"/>
-                                        </td>
-                                        <td>
-                                         {{ $permission->id ?? '' }}
-                                        </td>
-                                        <td>
-                                         {{ $permission->title ?? '' }}
+						        @if($permissions->count()>0)
+									<table class="table table-striped table-bordered table-hover" id="sample_3">
+										<thead>
+										<tr>
+											
+											<th>
+												id
+											</th>
+											<th>
+												title
+											</th>
+											<th>
+												Status
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										@foreach($permissions as $key => $permission)
+											<tr class="odd gradeX">
+											
+												<td>
+												{{ $permission->id ?? '' }}
+												</td>
+												<td>
+												{{ $permission->title ?? '' }}
 
-                                        </td>
-                                        <td>
-                                            @can('permission_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('permissions.show', $permission->id) }}">
-                                                    {{ trans('global.view') }}
-                                                </a>
-                                            @endcan
-                                            @can('permission_edit')
-                                                <a class="btn btn-xs btn-info" href="{{ route('permissions.edit', $permission->id) }}">
-                                                    {{ trans('global.edit') }}
-                                                </a>
-                                            @endcan
-                                            @can('permission_delete')
-                                                <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                                </form>
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                @endforeach
-								</tbody>
-								</table>
-							</div>
+												</td>
+												<td>
+													@can('permission_show')
+														<a class="btn btn-xs btn-primary" href="{{ route('permissions.show', $permission->id) }}">
+															{{ trans('global.view') }}
+														</a>
+													@endcan
+													@can('permission_edit')
+														<a class="btn btn-xs btn-info" href="{{ route('permissions.edit', $permission->id) }}">
+															{{ trans('global.edit') }}
+														</a>
+													@endcan
+													@can('permission_delete')
+														<form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+															<input type="hidden" name="_method" value="DELETE">
+															<input type="hidden" name="_token" value="{{ csrf_token() }}">
+															<input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+														</form>
+													@endcan
+												</td>
+											</tr>
+										@endforeach
+										</tbody>
+										</table>
+									
+									<div class="d-flex justify-content-center">
+									  {{ $permissions->links('vendor.pagination.bootstrap-4')   }}
+								   </div>
+								@else
+								  <div class="alert alert-warning"> Sorry there is no result to you </div>
+
+                                @endif
+                          </div>
 						</div>
 						<!-- END EXAMPLE TABLE PORTLET-->
 					</div>
