@@ -10,6 +10,7 @@ use App\Models\Permission;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Session;
 
 class PermissionsController extends Controller
 {
@@ -33,6 +34,7 @@ class PermissionsController extends Controller
     {
         $permission = Permission::create($request->all());
 
+        \Session::flash("msg", "تم إضافة الصلاحية بنجاح");
         return redirect()->route('permissions.index');
 
     }
@@ -47,6 +49,7 @@ class PermissionsController extends Controller
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
         $permission->update($request->all());
+        \Session::flash("msg", "تم تعديل الصلاحية بنجاح");
 
         return redirect()->route('permissions.index');
 
@@ -62,6 +65,7 @@ class PermissionsController extends Controller
     public function destroy(Permission $permission)
     {
         abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+         session()->flash("msg", "w: تم الحذف بنجاح");
 
         $permission->delete();
 
@@ -72,6 +76,7 @@ class PermissionsController extends Controller
     public function massDestroy(MassDestroyPermissionRequest $request)
     {
         Permission::whereIn('id', request('ids'))->delete();
+         session()->flash("msg", "w: تم الحذف بنجاح");
 
         return response(null, Response::HTTP_NO_CONTENT);
 

@@ -1,15 +1,16 @@
 @extends('layouts.app') 
 @section('content')
+@include('shared.msg')
 
 <div class="card">
-    <div class="card-header">
+    <div class="card-header ">
         {{ trans('global.show') }} {{ trans('cruds.user.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('users.index') }}">
+            <div class="form-group ">
+                <a class="btn btn-danger" href="{{ route('users.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -59,8 +60,8 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('users.index') }}">
+              <div class="form-group ">
+                <a class="btn btn-danger" href="{{ route('users.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>

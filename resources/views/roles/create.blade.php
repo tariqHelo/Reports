@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-
+@include('shared.msg')
 <div class="card">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.role.title_singular') }}
@@ -39,8 +39,10 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
-                    {{ trans('global.save') }}
-                </button>
+                    حفظ
+				</button>
+			<a href="{{route('roles.index')}}" type="button" class="btn default">إلغاء</a>
+
             </div>
         </form>
     </div>

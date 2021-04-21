@@ -32,8 +32,8 @@ class Section extends Model
       return $this->belongsTo(PublicAdministration::class , 'public_id' , 'id');
     }
 
-     public function administration()
-     {
-       return $this->belongsTo(Administration::class , 'administration_id' , 'id');
-     }
+    public function administration()
+    {
+      return $this->belongsTo(Administration::class , 'administration_id' , 'id');
+    }
 }

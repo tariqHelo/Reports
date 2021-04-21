@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-
+@include('shared.msg')
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.role.title_singular') }}
@@ -39,9 +39,11 @@
                 <span class="help-block">{{ trans('cruds.role.fields.permissions_helper') }}</span>
             </div>
             <div class="form-group">
-                <button class="btn btn-danger" type="submit">
-                    {{ trans('global.save') }}
-                </button>
+               <button class="btn btn-danger" type="submit">
+                    حفظ
+				</button>
+			<a href="{{route('roles.index')}}" type="button" class="btn default">إلغاء</a>
+
             </div>
         </form>
     </div>

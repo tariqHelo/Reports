@@ -58,6 +58,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('id', 1)->exists();
@@ -65,18 +66,23 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
-
+      return $this->belongsToMany(Role::class);
     }
-
-    public function publicAdministration(): BelongsTo
+    public function publicAdministration()
     {
-     return $this->belongsTo(PublicAdministrations::class , 'public_id' , 'id');
+    return $this->belongsTo(PublicAdministration::class , 'public_id' , 'id');
     }
-
-     public function administration(): BelongsTo
-     {
-       return $this->belongsTo(Administration::class , 'administration_id' , 'id');
-     }
+    public function administration(): BelongsTo
+    {
+    return $this->belongsTo(Administration::class , 'administration_id' , 'id');
+    }
+    public function section()
+    {
+    return $this->belongsTo(Section::class, 'section_id ' , 'id');
+    }
+    public function branche()
+    {
+    return $this->belongsTo(Branche::class , 'branche_id' , 'id');
+    }
 
 }

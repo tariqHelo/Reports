@@ -37,6 +37,7 @@ class UsersController extends Controller
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
+        \Session::flash("msg", "تم إضافة المستخدم بنجاح");
 
         return redirect()->route('users.index');
 
@@ -57,6 +58,7 @@ class UsersController extends Controller
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
+        \Session::flash("msg", "تم تعديل المستخدم بنجاح");
 
         return redirect()->route('users.index');
 
@@ -76,7 +78,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->delete();
-
+     session()->flash("msg", "w: تم الحذف بنجاح");
         return back();
 
     }
@@ -84,6 +86,7 @@ class UsersController extends Controller
     public function massDestroy(MassDestroyUserRequest $request)
     {
         User::whereIn('id', request('ids'))->delete();
+         session()->flash("msg", "w: تم الحذف بنجاح");
 
         return response(null, Response::HTTP_NO_CONTENT);
 

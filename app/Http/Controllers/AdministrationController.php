@@ -19,8 +19,8 @@ class AdministrationController extends Controller
      */
     public function index()
     {   
-        $administrations = Administration::orderBy('id', 'DESC')->get();
-        return view('admin.administration.index')
+        $administrations = Administration::orderBy('id', 'asc')->get();
+        return view('admin.master.administration.index')
         ->with('administrations' , $administrations);
     }
 
@@ -34,7 +34,7 @@ class AdministrationController extends Controller
         $branches = Branche::get();
         $publics = PublicAdministration::get();
         $users = User::get();
-        return view('admin.administration.create')
+        return view('admin.master.administration.create')
            ->with('branches' , $branches)
           ->with('publics' , $publics)
            ->with('users' , $users);
@@ -48,7 +48,7 @@ class AdministrationController extends Controller
      */
     public function store(Request $request)
     {
-          //   dd($request->all());
+        // dd($request->all());
          $this->validate($request, [
             'title'  => 'required',
             'public_id' => 'required',
@@ -91,7 +91,7 @@ class AdministrationController extends Controller
 
         $users = User::get();
         $branches = Branche::get();
-        return view('admin.administration.edit')
+        return view('admin.master.administration.edit')
         ->with('administrations' , $administrations)
         ->with('publics' , $publics)
         ->with('branches' , $branches)

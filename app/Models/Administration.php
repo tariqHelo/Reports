@@ -10,7 +10,7 @@ class Administration extends Model
 
     protected $table ="administrations";
 
-    protected $fillable = ['title' , 'user_id' , 'branch_id' , 'public_id'];
+    protected $fillable = ['title' , 'user_id' , 'branche_id' , 'public_id'];
 
     use HasFactory;
         /**
@@ -35,7 +35,7 @@ class Administration extends Model
 
     public function branche()
     {
-        return $this->belongsTo(Branche::class , 'branch_id' , 'id');
+        return $this->belongsTo(Branche::class , 'branche_id' , 'id');
     }
        
 

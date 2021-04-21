@@ -1,5 +1,6 @@
 @extends('layouts.app') 
 @section('content')
+@include('shared.msg')
 		<!-- BEGIN PAGE CONTENT-->
 				<div class="row">
 

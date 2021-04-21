@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3"> الإدارة التابع لها</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="public_id"> 
+                                <select class="form-control" name="administration_id"> 
                                     <option></option>
                                     @foreach($administrations as $administration)
                                         <option value="{{ $administration->id }}">{{ $administration->title }}</option>

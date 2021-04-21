@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-
+@include('shared.msg')
 <div class="card">
     <div class="card-header">
         {{ trans('global.show') }} {{ trans('cruds.role.title') }}

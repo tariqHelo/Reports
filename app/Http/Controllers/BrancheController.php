@@ -16,8 +16,8 @@ class BrancheController extends Controller
      */
     public function index()
     {
-         $branches = Branche::orderBy('id', 'DESC')->get();
-        return view('admin.branches.index')
+         $branches = Branche::orderBy('id', 'asc')->get();
+        return view('admin.master.branches.index')
         ->with('branches' , $branches);
     }
 
@@ -30,7 +30,7 @@ class BrancheController extends Controller
     {
           $publics = PublicAdministration::get();
           $users = User::get();
-          return view('admin.branches.create')
+          return view('admin.master.branches.create')
           ->with('publics' , $publics)
           ->with('users' , $users);
 
@@ -82,7 +82,7 @@ class BrancheController extends Controller
         $branches = Branche::find($id);
         $publics = PublicAdministration::get();
         $users = User::get();
-        return view('admin.branches.edit')
+        return view('admin.master.branches.edit')
         ->with('branches' , $branches)
         ->with('publics' , $publics)
         ->with('users' , $users);

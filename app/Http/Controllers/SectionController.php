@@ -18,8 +18,8 @@ class SectionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    $sections = Section::orderBy('id', 'DESC')->get();
-          return view('admin.sections.index')
+    {    $sections = Section::orderBy('id', 'asc')->get();
+          return view('admin.master.sections.index')
           ->with('sections' , $sections);
     }
 
@@ -34,7 +34,7 @@ class SectionController extends Controller
         $publics = PublicAdministration::get();
         $administrations = Administration::get();
         $users = User::get();
-        return view('admin.sections.create')
+        return view('admin.master.sections.create')
         ->with('publics' , $publics)
         ->with('administrations' , $administrations)
         ->with('users' , $users);
@@ -83,7 +83,7 @@ class SectionController extends Controller
        $publics = PublicAdministration::get();
        $administrations = Administration::get();
        $users = User::get();
-       return view('admin.sections.edit')
+       return view('admin.master.sections.edit')
        ->with('sections' , $sections)
        ->with('publics' , $publics)
        ->with('administrations' , $administrations)
@@ -117,8 +117,10 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy($id)
     {
-        //
+    $sections = Section::findOrFail($id)->delete();
+    session()->flash("msg", "w: تم الحذف بنجاح");
+    return redirect()->route('sections.index');
     }
 }

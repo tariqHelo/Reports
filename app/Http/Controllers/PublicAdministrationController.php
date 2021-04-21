@@ -19,8 +19,8 @@ class PublicAdministrationController extends Controller
      */
     public function index()
     {
-      $publics = PublicAdministration::orderBy('id', 'DESC')->get();
-       return view('admin.publicAdministration.index')
+      $publics = PublicAdministration::orderBy('id', 'asc')->get();
+       return view('admin.master.publicAdministration.index')
        ->with('publics' , $publics);
        //->with('users', $users);
     }
@@ -33,7 +33,7 @@ class PublicAdministrationController extends Controller
     public function create()
     {
       $users = User::get();
-      return view('admin.publicAdministration.create')
+      return view('admin.master.publicAdministration.create')
       ->with('users' , $users);
 
     }
@@ -74,7 +74,7 @@ class PublicAdministrationController extends Controller
            //dd(20);
            $users = User::get();
            $publics = PublicAdministration::find($id);
-           return view('admin.publicAdministration.edit')
+           return view('admin.master.publicAdministration.edit')
            ->with('users' , $users)
            ->with('publics' , $publics);
 
