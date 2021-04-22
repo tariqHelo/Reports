@@ -78,7 +78,7 @@
             <div class="form-group">
                 <label class="required" for="roles"><h4>  الإدوار</h4></label>
                 
-                  <select id="multiple" class="form-control select2-multiple" name="roles[]" id="roles" multiple>
+                  <select id="multiple" class="form-control select2-multiple" name="roles[]" id="roles" multiple required>
                         @foreach($roles as $id => $roles)
                         <option value="{{ $id }}" {{ in_array($id, old('roles', [])) ? 'selected' : '' }}>{{ $roles }}</option>
                         @endforeach

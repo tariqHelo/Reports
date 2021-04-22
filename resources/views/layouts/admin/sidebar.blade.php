@@ -21,7 +21,7 @@
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
-                                @can('PublicAdministration')
+                                @can('publicAdministration_access')
                                     <li class="nav-item start ">
                                           <a href="{{route('publicAdministration.index')}}" class="nav-link ">
                                             <i class="icon-bar-chart"></i>
@@ -29,7 +29,7 @@
                                         </a>
                                     </li>
                                 @endcan
-                                @can('Branches')
+                                @can('Branches_access')
                                        <li class="nav-item start ">
                                         <a href="{{route('branches.index')}}" class="nav-link ">
                                             <i class="icon-bulb"></i>
@@ -38,7 +38,7 @@
                                         </a>
                                     </li> 
                                 @endcan
-                                @can('Administration')
+                                @can('Administration_access')
                                     <li class="nav-item start ">
                                         <a href="{{route('administration.index')}}" class="nav-link ">
                                             <i class="icon-bar-chart"></i>
@@ -46,7 +46,7 @@
                                         </a>
                                     </li> 
                                 @endcan
-                                @can('Sections')
+                                @can('Sections_access')
                                     <li class="nav-item start ">
                                         <a href="{{route('sections.index')}}" class="nav-link ">
                                             <i class="icon-graph"></i>
@@ -58,7 +58,7 @@
                                 </ul>
                             </li>  
                     @endcan
-                    @can('Users')
+                    @can('user_access')
                         <li class="nav-item ">
                            <a href="{{route('users.index')}}" class="nav-link nav-toggle">
                                 <i class="icon-settings"></i>
@@ -67,7 +67,7 @@
                             </a>
                         </li> 
                     @endcan
-                    @can('Roles')
+                    @can('role_access')
                         <li class="nav-item ">
                                 <a href="{{route('roles.index')}}" class="nav-link ">
                                     <i class="icon-bulb"></i>
@@ -75,7 +75,7 @@
                                 </a>
                         </li>    
                     @endcan
-                    @can('Permissions')
+                    @can('permission_access')
                             <li class="nav-item ">
                             <a href="{{route('permissions.index')}}" class="nav-link nav-toggle">
                                     <i class="icon-bar-chart"></i>
@@ -92,14 +92,14 @@
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                @can('Tasks_Status')
+                                @can('Taskstatus_access')
                                 <li class="nav-item  ">
                                         <a href="{{route('taskstatus.index')}}" class="nav-link ">
                                             <span class="title">حالة المهام </span>
                                         </a>
                                     </li>   
                                 @endcan
-                                @can('Tasks_Type')
+                                @can('Taskstype_access')
                                     <li class="nav-item  ">
                                         <a href="{{route('taskstype.index')}}" class="nav-link ">
                                             <span class="title">نوع المهام</span>
@@ -111,7 +111,7 @@
                             
                         </li>  
                      @endcan
-                     @can('Tasks')
+                     @can('Tasks_access')
                           <li class="nav-item">
                           <a href="{{route('tasks.index')}}" class="nav-link nav-toggle">
                                 <i class="icon-puzzle"></i>
@@ -122,7 +122,7 @@
                     @endcan
                     @can('Reports')
                         <li class="nav-item  ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
+                            <a href="#" class="nav-link nav-toggle">
                                 <i class="icon-bulb"></i>
                                 <span class="title">التقارير</span>
                                 <span class="arrow"></span>
@@ -153,7 +153,7 @@
                     @endcan
                     @can('Settings')
                         <li class="nav-item  ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
+                            <a href="#" class="nav-link nav-toggle">
                                 <i class="icon-briefcase"></i>
                                 <span class="title">الإعدادت</span>
                                 <span class="arrow"></span>
@@ -183,7 +183,7 @@
                         </li>   
                     @endcan
                     @can('Help')
-                        <li class="nav-item  ">
+                        <li class="nav-item">
                             <a href="#" class="nav-link nav-toggle">
                                 <i class="icon-wallet"></i>
                                 <span class="title">صفحة المساعدة</span>

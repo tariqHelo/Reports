@@ -337,11 +337,12 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                         	<ul class="dropdown-menu dropdown-menu-default">
+                               @can('user_edit')
                                 <li>
-
                                     <a href="{{ route('users.edit', auth()->user()->id) }}">
                                     <i class="icon-user"></i> حسابي</a>
-                                </li>
+                                </li> 
+                               @endcan
                                 <li>
                                     <a href="{{route('change-password')}}">
                                     <i class="icon-lock"></i> تغير كلمة المرور</a>

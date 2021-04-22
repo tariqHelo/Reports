@@ -25,7 +25,8 @@
                                 <select class="form-control" name="user_id" value="{{ old('user_id') }} ">
                                     <option></option>
                                     @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
+
                                     @endforeach	
                                 </select>
                             </div>
@@ -36,7 +37,8 @@
                                 <select class="form-control" name="type_id">
                                     <option></option>
                                     @foreach($taskstype as $type)
-                                        <option value="{{ $type->id }}">{{ $type->type }}</option>
+        <option value="{{$type->id}}" {{(old('type_id')==$type->id)? 'selected':''}}>{{$type->type}}</option>
+
                                     @endforeach	
                                 </select>
                             </div>
@@ -47,7 +49,9 @@
                                 <select class="form-control" name="statue_id">
                                     <option></option>
                                     @foreach($taskstatus as $status)
-                                        <option value="{{ $status->id }}">{{ $status->status }}</option>
+    <option value="{{$status->id}}" {{(old('statue_id')==$status->id)? 'selected':''}}>{{$status->status}}</option>
+
+    
                                     @endforeach	
                                 </select>
                             </div>
@@ -55,26 +59,18 @@
                          <div class="form-group">
                                 <label class="control-label col-md-3">تاريخ بداية المهمة</label>
                                 <div class="col-md-3">
-                                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-                                        <input type="text" class="form-control" name="sdate" readonly>
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" value="{{old('sdate')}}" name="sdate">
+                                      
                                     </div>
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3">تاريخ نهاية المهمة</label>
                                 <div class="col-md-3">
-                                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-                                        <input type="text" class="form-control" name="edate" readonly>
-                                        <span class="input-group-btn">
-                                            <button class="btn default" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                    <div class="input-group ">
+                                    <input type="date" class="form-control" value="{{old('edate')}}" name="edate">
+                                      
                                     </div>
                                 </div>
                             </div> 
@@ -82,7 +78,7 @@
                             <label class="control-label col-md-3"> ساعات العمل</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="worktime">
-                                   <option> </option>
+                                   <option></option>
                                     <option value="1"> 1</option>
                                     <option value="2"> 2</option>
                                     <option value="3"> 3</option>
@@ -106,12 +102,12 @@
                                 <select class="form-control" name="administration_id"> 
                                     <option></option>
                                     @foreach($administrations as $administration)
-                                        <option value="{{ $administration->id }}">{{ $administration->title }}</option>
+    <option value="{{$administration->id}}" {{(old('statue_id')==$administration->id)? 'selected':''}}>{{$administration->title}}</option>
                                     @endforeach	
                                 </select>
                             </div>
                         </div>
-                         {{-- <div class="form-group">
+                         <div class="form-group">
                             <label class="control-label col-md-3"> القسم</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="section_id">
@@ -121,7 +117,7 @@
                                     @endforeach	
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
                          {{-- <div class="form-group">
                             <label class="control-label col-md-3"> الموظف</label>
                             <div class="col-md-9">
@@ -137,7 +133,7 @@
                         <div class="form-group">
                                 <label class="control-label col-md-3"> ملاحظات</label>
                                 <div class="col-md-9">
-                                    <textarea class="form-control" name="note" rows="3"></textarea>
+                                    <textarea class="form-control" name="note" rows="3">{{ old('note') }}</textarea>
                                 </div>
                          </div>
                     </div>

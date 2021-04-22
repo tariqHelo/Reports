@@ -54,7 +54,7 @@ class UsersController extends Controller
             'numberId' => 'required',
             'jobtitle' => 'required',
             'phone' => 'required',
-            'email' => 'required',
+             'email' => 'required|email|unique:users,email',
             'password' => 'required'
          ];
          $customMessages = [
@@ -85,8 +85,11 @@ class UsersController extends Controller
          ->withInput();
          }
 
+      
 
-        $user = User::create($request->all());
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+        $user = User::create($data);
         $user->roles()->sync($request->input('roles', []));
         \Session::flash("msg", "تم إضافة المستخدم بنجاح");
 
@@ -133,7 +136,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->delete();
-     session()->flash("msg", "w: تم الحذف بنجاح");
+           session()->flash("msg", "w: تم الحذف بنجاح");
         return back();
 
     }
@@ -142,7 +145,6 @@ class UsersController extends Controller
     {
         User::whereIn('id', request('ids'))->delete();
          session()->flash("msg", "w: تم الحذف بنجاح");
-
         return response(null, Response::HTTP_NO_CONTENT);
 
     }

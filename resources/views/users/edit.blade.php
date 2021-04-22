@@ -131,7 +131,7 @@
                 
                  <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}" name="roles[]" id="roles" multiple required>
                     @foreach($roles as $id => $roles)
-                        <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
+                         <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
                     @endforeach
                 </select>
                 </div>
@@ -141,8 +141,6 @@
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
-                <a href="{{route('users.index')}}" type="button" class="btn default">إلغاء</a>
-
             </div>
         </form>
 </div>

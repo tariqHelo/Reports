@@ -2,11 +2,11 @@
 @extends('layouts.app') 
 @section('content')
 @include('shared.msg')
-<div class="clearfix">
-        
- <a href="{{route('taskstype.create')}}" type="button" class="btn btn-circle green-meadow">إضافة جديد  </a>
-      
-    </div>
+ @can('Taskstype_create')
+        <div class="clearfix">  
+           <a href="{{route('taskstype.create')}}" type="button" class="btn btn-circle green-meadow">إضافة جديد  </a>
+        </div>
+    @endcan
 <div class="row">
  <div class="col-md-12">
     <div >
@@ -41,9 +41,13 @@
                         <tr>
                             <td> {{$tasktype->id}}</td>
                             <td>{{$tasktype->type}} </td>
-                            <td>   
-                            <a href="{{route('taskstype-edit'   ,    $tasktype->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-                            <a href="{{route('taskstype-delete' ,   $tasktype->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+                            <td>  
+                                @can('Tasks_edit')
+                               <a href="{{route('taskstype-edit'   ,    $tasktype->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+                                @endcan 
+                                @can('Tasks_delete')
+                              <a href="{{route('taskstype-delete' ,   $tasktype->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>                                  
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

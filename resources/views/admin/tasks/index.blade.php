@@ -1,9 +1,12 @@
 @extends('layouts.app') 
 @section('content')
 @include('shared.msg')
-<div class="clearfix">
-    <a href="{{route('tasks.create')}}" type="button" class="btn btn-circle green-meadow">إضافة جديد  </a>
-</div>
+    @can('Tasks_create')
+        <div class="clearfix">
+            <a href="{{route('tasks.create')}}" type="button" class="btn btn-circle green-meadow">إضافة جديد  </a>
+        </div>    
+    @endcan
+
 <div class="row">
  <div class="col-md-12">
     <div>
@@ -26,17 +29,17 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th> id </th>
-                            <th>Section</th>
-                            <th>Administration</th>
-                            <th>TasksType </th>
-                            <th> TaskStatus </th>
-                            <th>StartDate</th>
-                            <th>EndDate </th>
-                            <th> TimeWork </th>
-                            <th> Title </th>
-                            <th>  Empolyee</th>
-                            <th>  User</th>
+                            <th> # </th>
+                            <th> العنوان </th>
+                            <th>القسم</th>
+                            <th>الإدارة</th>
+                            <th>نوع المهام </th>
+                            <th> حالة المهام </th>
+                            <th>بداية المهمة</th>
+                            <th>نهاية المهمة </th>
+                            <th> وقت العمل  </th>
+                            {{-- <th>  Empolyee</th> --}}
+                            <th>  المستخدم</th>
                             <th>  Action</th>
                         </tr>
                     </thead>
@@ -44,22 +47,28 @@
                             @foreach ( $tasks as $task )
                             <tr>
                                 <td> {{$task->id}} </td>
-                                <td> {{$task->section->title ?? "" }} </td>
+                                <td> {{$task->title ?? ""}} </td>
+                                <td> {{$task->section_id ?? "" }} </td>
                                 <td> {{$task->administration->title ?? ""}} </td>
-                                <td> {{$task->tasktype->title ?? "" }} </td>
-                                <td> {{$task->statue->status ?? ""}} </td>
+                                <td> {{$task->type_id ?? "" }} </td>
+                                <td> {{$task->statue->status ?? "" }} </td>
                                 <td> {{$task->sdate}} </td>
-                                <td> {{$task->edate}} </td>
-                                <td> {{$task->worktime}} </td>
-                                <td> {{$task->title}} </td>
-                                <td> {{$task->employee->name ?? ""}} </td>
+                                <td> {{$task->edate ?? ""}} </td>
+                                <td> {{$task->worktime ?? ""}} </td>
                                 <td> {{$task->user->name ?? ""}} </td>
-
                                 <td>   
-                                <a href="{{route('tasks-edit' , $task->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-                                <a href="{{route('tasks-delete' , $task->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+                                    @can('Tasks_show')
+                                      <a class="btn btn-primary btn-sm" href="{{ route('tasks.show', $task->id) }}">
+                                       <i class='fa fa-eye'></i>
+                                    </a>
+                                    @endcan
+                                    @can('Tasks_edit')
+                                        <a href="{{route('tasks-edit' , $task->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+                                    @endcan
+                                    @can('Tasks_delete')
+                                        <a href="{{route('tasks-delete' , $task->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+                                    @endcan
                                 </td>
-
                             </tr>
                             @endforeach
                         </tbody>
@@ -70,7 +79,14 @@
 
 
 
-    <!-- END SAMPLE TABLE PORTLET--> 
+
+
+ @endsection
+
+
+
+
+     <!-- END SAMPLE TABLE PORTLET--> 
 
        <!-- BEGIN EXAMPLE TABLE PORTLET-->
                     {{-- <div class="portlet box green">
@@ -132,6 +148,3 @@
     </div> --}}
             <!-- END CONTENT -->
 
-
-
- @endsection

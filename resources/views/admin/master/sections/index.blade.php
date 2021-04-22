@@ -5,11 +5,14 @@
  <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="btn-group">
-						<a href="{{route('sections.create')}}" class="btn green">
-                            إضافة<i class="fa fa-plus"></i>
-                        </a>
-                    </div>
+						@can('Sections_create')
+							<div class="btn-group">
+								<a href="{{route('sections.create')}}" class="btn green">
+									إضافة<i class="fa fa-plus"></i>
+								</a>
+							</div>	
+						@endcan
+                        
                 </div>
             </div>
         </div>
@@ -66,8 +69,12 @@
 												{{ $section->user->name ?? "" }}
 											</td>
 												<td>   
-												<a href="{{route('section-edit' , $section->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-												<a href="{{route('section-delete'   , $section->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+													@can('Sections_edit')
+													  <a href="{{route('section-edit' , $section->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+													@endcan
+													@can('Sections_delete')
+													  <a href="{{route('section-delete'   , $section->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+													@endcan
 										
 											</td>
 										</tr>

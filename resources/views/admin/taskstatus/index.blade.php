@@ -2,11 +2,12 @@
 @extends('layouts.app') 
 @section('content')
 @include('shared.msg')
-<div class="clearfix">
-        
- <a href="{{route('taskstatus.create')}}" type="button" class="btn btn-circle green-meadow">إضافة جديد  </a>
-      
-    </div>
+    @can('Taskstatus_create')
+        <div class="clearfix">  
+           <a href="{{route('taskstatus.create')}}" type="button" class="btn btn-circle green-meadow">إضافة جديد  </a>
+        </div>
+    @endcan
+           
 <div class="row">
  <div class="col-md-12">
     <div >
@@ -42,8 +43,12 @@
                             <td> {{$tStatus->id}} </td>
                             <td> {{$tStatus->status}} </td>
                             <td>   
-                            <a href="{{route('taskstatus-edit'   ,    $tStatus->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-                            <a href="{{route('taskstatus-delete' ,   $tStatus->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+                            @can('Taskstatus_edit')
+                                <a href="{{route('taskstatus-edit'   ,    $tStatus->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+                            @endcan
+                            @can('Taskstatus_delete')
+                             <a href="{{route('taskstatus-delete' ,   $tStatus->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>                               
+                            @endcan
                             </td>
                         </tr>
                         @endforeach

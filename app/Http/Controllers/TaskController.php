@@ -67,23 +67,23 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'user_id' => 'required',
-            'type_id' => 'required',
-            'statue_id' => 'required',
-            'sdate' => 'required',
-           /// 'administration_id' => 'required',
-         ];
-         $customMessages = [
-         'user_id.required' => 'يرجي إدخال الإسم بالكامل ',
-         'type_id.required' => 'يرجي إدخال رقم الهوية ',
-         'statue_id.required' => 'يرجي إدخال المسمي الوظيفي ',
-         'phone.required' => 'يرجي إدخال رقم الجوال  ',
-        'sdate.required' => 'يرجي إدخال الإيميل ',
+          $rules = [
+              'user_id' => 'required',
+              'type_id' => 'required',
+              'statue_id' => 'required',
+              'sdate' => 'required',
+             /// 'administration_id' => 'required',
+           ];
+           $customMessages = [
+           'user_id.required' => 'يرجي إدخال الإسم بالكامل ',
+           'type_id.required' => 'يرجي إدخال رقم الهوية ',
+           'statue_id.required' => 'يرجي إدخال الحالة  ',
+           'phone.required' => 'يرجي إدخال رقم الجوال  ',
+           'sdate.required' => 'يرجي إدخال تاريخ بداية المهمة ',
 
-         ];
+           ];
 
-        $validater = Validator::make($request->all(), $rules , $customMessages);
+          $validater = Validator::make($request->all(), $rules , $customMessages);
 
          if($request->edate == null && $request->worktime == null)
             {
@@ -91,12 +91,12 @@ class TaskController extends Controller
                 $validater->errors()->add('feild' , '(يرجي إدخال نهاية المهمة أو ساعات العمل)' );
                 });
          }
-
          if($validater->fails()){
          return redirect()->back()
          ->withErrors($validater)
          ->withInput();
          }
+
          Task::create($request->all());
          Session::flash("msg", "تم إضافة المهمة بنجاح");
          return redirect()->route('tasks.index');
@@ -108,9 +108,28 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        //
+      //  dd(20);
+           $tasks = Task::find($id);
+           $users = User::get();
+           $branches = Branche::get();
+           $taskstatus = TaskStatus::get();
+           $taskstype = TasksType::get();
+           $administrations = Administration::get();
+           $sections = Section::get();
+           $employees = employee::get();
+
+           return view('admin.tasks.show')
+           ->with('users' , $users)
+           ->with('branches' , $branches)
+           ->with('taskstatus' , $taskstatus)
+           ->with('taskstype' , $taskstype)
+           ->with('administrations' , $administrations)
+           ->with('sections' , $sections)
+           ->with('employees' , $employees)
+           ->with('tasks' , $tasks);
+        
     }
 
     /**
@@ -166,6 +185,6 @@ class TaskController extends Controller
     {
         $tasks = Task::findOrFail($id)->delete();
         session()->flash("msg", "w: تم الحذف بنجاح");
-        return redirect()->route('publicAdministration.index');
+        return redirect()->route('tasks.index');
     }
 }

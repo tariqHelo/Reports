@@ -19,11 +19,11 @@ class AdminController extends Controller
             // Success
             $user = User::find(auth()->user()->id);
             $user->update(['password'=>bcrypt($request->new_password)]);
-            session()->flash("msg", "s:Password updated Successfully");
+            session()->flash("msg", "s:تم تعديل كلمة السر بنجاح");
             return redirect(route("change-password"));
         }
         else{
-            session()->flash("msg", "e:Invalid Current Password");
+            session()->flash("msg", "e:خطأ في كلمة المرور الحالية");
             return redirect(route("change-password"));
         }
     }

@@ -81,10 +81,13 @@ class User extends Authenticatable
     {
     return $this->belongsTo(PublicAdministration::class , 'public_id' , 'id');
     }
-    public function administration(): BelongsTo
+
+   public function administration()
     {
-    return $this->belongsTo(Administration::class , 'administration_id' , 'id');
+      return $this->belongsTo(Administration::class , 'administration_id' , 'id');
     }
+
+    
     public function section()
     {
     return $this->belongsTo(Section::class, 'section_id ' , 'id');

@@ -5,13 +5,15 @@
  <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="btn-group">
-						<a href="{{route('branches.create')}}" class="btn green">
-                            إضافة<i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+						@can('Branches_create')
+							 <div class="btn-group">
+								<a href="{{route('branches.create')}}" class="btn green">
+									إضافة<i class="fa fa-plus"></i>
+								</a>
+							</div>
+						@endcan
+                  </div>
+               </div>
         </div>
 	         <div class="row">
 				<div class="col-md-12">
@@ -63,9 +65,12 @@
 										</td>
 									
                                         	<td>   
-											<a href="{{route('branche-edit' ,$branche->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-											<a href="{{route('branche-delete' , $branche->id)}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
-									
+												@can('Branches_edit')
+											    	<a href="{{route('branche-edit' ,$branche->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+												@endcan
+												@can('Branches_delete')
+											    	<a href="{{route('branche-delete' , $branche->id)}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+												@endcan
 										</td>
 									</tr>
                             @endforeach

@@ -5,11 +5,14 @@
   <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="btn-group">
-						<a href="{{route('administration.create')}}" class="btn green">
-                            إضافة<i class="fa fa-plus"></i>
-                        </a>
-                    </div>
+						@can('Administration_create')
+							<div class="btn-group">
+								<a href="{{route('administration.create')}}" class="btn green">
+									إضافة<i class="fa fa-plus"></i>
+								</a>
+							</div>	
+						@endcan
+						
                 </div>
             </div>
         </div>
@@ -65,9 +68,13 @@
 										<td>
 											{{ $administration->user->name ?? "" }}
                                         </td>
-                                        	<td>   
-											<a href="{{route('administration-edit'   ,$administration->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
-											<a href="{{route('administration-delete' ,$administration->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+                                        	<td> 
+											   @can('Administration_edit')
+											    <a href="{{route('administration-edit'   ,$administration->id )}}"  class="btn btn-primary btn-sm"><i class='fa fa-edit'></i></a>
+											   @endcan  
+											   @can('Administration_delete')
+												<a href="{{route('administration-delete' ,$administration->id )}}" onclick='return confirm("Are you sure dude?")' class="btn btn-warning btn-sm"><i class='fa fa-trash'></i></a>
+											   @endcan
 									
 										</td>
 									</tr>

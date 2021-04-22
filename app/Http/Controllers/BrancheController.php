@@ -6,6 +6,8 @@ use App\Models\Branche;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class BrancheController extends Controller
 {
@@ -16,6 +18,8 @@ class BrancheController extends Controller
      */
     public function index()
     {
+   /// abort_if(Gate::denies('Branches_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
          $branches = Branche::orderBy('id', 'asc')->get();
         return view('admin.master.branches.index')
         ->with('branches' , $branches);

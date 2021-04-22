@@ -11,7 +11,7 @@
         <div class="form-group">
             <div class="form-group ">
                 <a class="btn btn-danger" href="{{ route('users.index') }}">
-                    {{ trans('global.back_to_list') }}
+                    الرجوع إلي القائمة
                 </a>
             </div>
             <table class="table table-bordered table-striped">
@@ -26,7 +26,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.name') }}
+                            الإسم 
                         </th>
                         <td>
                             {{ $user->name }}
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.email') }}
+                            الإيميل
                         </th>
                         <td>
                             {{ $user->email }}
@@ -42,15 +42,63 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
+                            رقم الهوية
                         </th>
                         <td>
-                            {{ $user->email_verified_at }}
+                            {{ $user->numberId  ?? ""}}
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>
+                            المسمي الوظيفي
+                        </th>
+                        <td>
+                            {{ $user->jobtitle  ?? ""}}
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>
+                           رقم الجوال
+                        </th>
+                        <td>
+                            {{ $user->phone  ?? ""}}
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>
+                           الإدارة العامة 
+                        </th>
+                        <td>
+                            {{ $user->publicAdministration ?? "" }}
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>
+                           الفرع
+                        </th>
+                        <td>
+                            {{ $user->branche ?? ""}}
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>
+                            الإدارة
+                        </th>
+                        <td>
+                            {{ $user->administration ?? ""}}
+                        </td>
+                    </tr>
+                     <tr>
+                        <th>
+                            القسم
+                        </th>
+                        <td>
+                            {{ $user->section ?? "" }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.roles') }}
+                            الإداور
                         </th>
                         <td>
                             @foreach($user->roles as $key => $roles)
@@ -62,7 +110,7 @@
             </table>
               <div class="form-group ">
                 <a class="btn btn-danger" href="{{ route('users.index') }}">
-                    {{ trans('global.back_to_list') }}
+                    الرجوع إلي القائمة
                 </a>
             </div>
         </div>

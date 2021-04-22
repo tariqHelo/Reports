@@ -15,11 +15,11 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->nullable();
 
             $table->date('sdate');
-            $table->date('edate');
-            $table->string('worktime');
+            $table->date('edate')->nullable();
+            $table->string('worktime')->nullable();
             $table->longText('note')->nullable();
 
             $table->foreignId("employee_id")->nullable();
