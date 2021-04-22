@@ -11,6 +11,7 @@ use App\Models\Administration;
 use App\Models\TasksType;
 use App\Models\Section;
 use App\Models\employee;
+use Validator;
 
 use Illuminate\Support\Facades\Session;
 
@@ -66,21 +67,36 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        $rules = [
+            'user_id' => 'required',
+            'type_id' => 'required',
+            'statue_id' => 'required',
+            'sdate' => 'required',
+           /// 'administration_id' => 'required',
+         ];
+         $customMessages = [
+         'user_id.required' => 'يرجي إدخال الإسم بالكامل ',
+         'type_id.required' => 'يرجي إدخال رقم الهوية ',
+         'statue_id.required' => 'يرجي إدخال المسمي الوظيفي ',
+         'phone.required' => 'يرجي إدخال رقم الجوال  ',
+        'sdate.required' => 'يرجي إدخال الإيميل ',
 
-         // dd($request->all());
-        //  $this->validate($request, [
-        //  'title' => 'required',
-        //  'public_id' => 'required',
-        //  // 'branche_id' => 'required',
-        //  // 'user_id' => 'required'
-        //  ],
-        //  [
-        //  'title.required' => __('يرجي إدخال الإسم '),
-        //  'public_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
-        //  // 'branche_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
-        //  // 'user_id.required' => __('يرجي إخال الإدارة العامة التابع لها'),
-        //  ]);
+         ];
+
+        $validater = Validator::make($request->all(), $rules , $customMessages);
+
+         if($request->edate == null && $request->worktime == null)
+            {
+                $validater->after(function($validater){
+                $validater->errors()->add('feild' , '(يرجي إدخال نهاية المهمة أو ساعات العمل)' );
+                });
+         }
+
+         if($validater->fails()){
+         return redirect()->back()
+         ->withErrors($validater)
+         ->withInput();
+         }
          Task::create($request->all());
          Session::flash("msg", "تم إضافة المهمة بنجاح");
          return redirect()->route('tasks.index');

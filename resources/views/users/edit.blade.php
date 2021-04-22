@@ -57,8 +57,9 @@
 
   <!-- BEGIN PROFILE CONTENT -->
 <div class="profile-content">
-        <form method="POST" action="{{ route("users.store") }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("users.update" , $user->id) }}" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="form-group">
                 <label class="required" for="name"> <h4>الإسم بالكامل  </h4>  </label>
             <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $user->name)}}" required>

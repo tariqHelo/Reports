@@ -5,6 +5,8 @@ use App\Models\Section;
 
 use App\Models\Branche;
 use Illuminate\Support\Facades\Hash;
+use Validator;
+use Illuminate\Validation\Rule;
 
 use App\Models\Administration;
 use App\Models\PublicAdministration;
@@ -47,29 +49,44 @@ class UsersController extends Controller
     public function store(Request $request)
     {
        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-         
-    
-        $this->validate($request, [
-        'name' => 'required',
-        'numberId' => 'required',
-        'jobtitle' => 'required',
-        'phone' => 'required',
-        'email' => 'required',
-        'password' => 'required',
+         $rules = [
+            'name' => 'required',
+            'numberId' => 'required',
+            'jobtitle' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+         ];
+         $customMessages = [
+         'name.required' => 'يرجي إدخال الإسم بالكامل ',
+         'numberId.required' => 'يرجي إدخال  رقم الهوية ',
+         'jobtitle.required' => 'يرجي إدخال المسمي الوظيفي  ',
+         'phone.required' => 'يرجي إدخال رقم الجوال  ',
+        'email.required' => 'يرجي إدخال الإيميل  ',
+        'password.required' => 'يرجي إدخال  كلمة المرور ',
+
+         ];
+
+        $validater = Validator::make($request->all(), $rules , $customMessages);
+
+         if($request->public_id == null && $request->branche_id == null 
+         && $request->administration_id == null &&
+            $request->section_id == null)
+            {
+                $validater->after(function($validater){
+                $validater->errors()->add('feild' , ' واحدة من هذة القيم يجب أنا تكون موجودة (إدارة عامة أو فرع أو إدارة
+                أو قسم) ');
+                });
+         }
+
+         if($validater->fails()){
+         return redirect()->back()
+         ->withErrors($validater)
+         ->withInput();
+         }
 
 
-        'public_id'          => 'required',
-        'branche_id'         => 'required' ,
-        'administration_id'  => 'required',
-        'section_id'         => 'required',
-        
-        ],
-        [
-        'name.required' => __('يرجي إدخال الإسم '),
-        ]);
-
-       $password = Hash::make('password');
-        $user = User::create($request->all() , $password);
+        $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
         \Session::flash("msg", "تم إضافة المستخدم بنجاح");
 

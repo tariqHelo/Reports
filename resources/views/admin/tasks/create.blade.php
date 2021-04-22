@@ -20,34 +20,12 @@
                 @csrf
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3"> الإدارة</label>
+                            <label class="control-label col-md-3"> المستخدم</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="administration_id"> 
+                                <select class="form-control" name="user_id" value="{{ old('user_id') }} ">
                                     <option></option>
-                                    @foreach($administrations as $administration)
-                                        <option value="{{ $administration->id }}">{{ $administration->title }}</option>
-                                    @endforeach	
-                                </select>
-                            </div>
-                        </div>
-                         <div class="form-group">
-                            <label class="control-label col-md-3"> القسم</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="section_id">
-                                    <option></option>
-                                    @foreach($sections as $section)
-                                        <option value="{{ $section->id }}">{{ $section->title }}</option>
-                                    @endforeach	
-                                </select>
-                            </div>
-                        </div>
-                         <div class="form-group">
-                            <label class="control-label col-md-3"> الموظف</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="employee_id">
-                                    <option></option>
-                                    @foreach($employees as $employee)
-                                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach	
                                 </select>
                             </div>
@@ -63,7 +41,7 @@
                                 </select>
                             </div>
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label class="control-label col-md-3"> الحالة</label>
                             <div class="col-md-9">
                                 <select class="form-control" name="statue_id">
@@ -75,33 +53,6 @@
                             </div>
                         </div>
                          <div class="form-group">
-                            <label class="control-label col-md-3"> ساعات العمل</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="worktime">
-                                   <option> </option>
-                                    <option value="1"> 1</option>
-                                    <option value="2"> 2</option>
-                                    <option value="3"> 3</option>
-                                    <option value="4"> 4</option>
-                                    <option value="5"> 5</option>
-                                    <option value="6"> 6</option>
-                                    <option value="7"> 7</option>
-                                    <option value="8"> 8</option>
-                                </select>
-                            </div>
-                        </div>
-                         <div class="form-group">
-                            <label class="control-label col-md-3"> المستخدم</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="user_id">
-                                    <option></option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach	
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                                 <label class="control-label col-md-3">تاريخ بداية المهمة</label>
                                 <div class="col-md-3">
                                     <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
@@ -126,13 +77,63 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>                       
+                            </div> 
+                             <div class="form-group">
+                            <label class="control-label col-md-3"> ساعات العمل</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="worktime">
+                                   <option> </option>
+                                    <option value="1"> 1</option>
+                                    <option value="2"> 2</option>
+                                    <option value="3"> 3</option>
+                                    <option value="4"> 4</option>
+                                    <option value="5"> 5</option>
+                                    <option value="6"> 6</option>
+                                    <option value="7"> 7</option>
+                                    <option value="8"> 8</option>
+                                </select>
+                            </div>
+                        </div>
                          <div class="form-group">
                             <label class="control-label col-md-3">عنوان المهمة</label>
                             <div class="col-md-9">
                                 <input type="text" placeholder="عنوان المهمة" name="title" class="form-control" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"> الإدارة</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="administration_id"> 
+                                    <option></option>
+                                    @foreach($administrations as $administration)
+                                        <option value="{{ $administration->id }}">{{ $administration->title }}</option>
+                                    @endforeach	
+                                </select>
+                            </div>
+                        </div>
+                         {{-- <div class="form-group">
+                            <label class="control-label col-md-3"> القسم</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="section_id">
+                                    <option></option>
+                                    @foreach($sections as $section)
+                                        <option value="{{ $section->id }}">{{ $section->title }}</option>
+                                    @endforeach	
+                                </select>
+                            </div>
+                        </div> --}}
+                         {{-- <div class="form-group">
+                            <label class="control-label col-md-3"> الموظف</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="employee_id">
+                                    <option></option>
+                                    @foreach($employees as $employee)
+                                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                    @endforeach	
+                                </select>
+                            </div>
+                        </div> --}}
+                    
                         <div class="form-group">
                                 <label class="control-label col-md-3"> ملاحظات</label>
                                 <div class="col-md-9">
